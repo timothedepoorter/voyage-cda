@@ -1,4 +1,4 @@
-package fr.timothe.voyage;
+package fr.timothe.voyage.voyage;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
