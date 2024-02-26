@@ -1,8 +1,7 @@
 package fr.timothe.voyage.hebergement;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import fr.timothe.voyage.ville.Ville;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,7 +23,10 @@ public class Hebergement {
     public int nombreEtoiles;
     public double prix;
 
-//    public Ville ville
+    @ManyToOne // Many hébergements to one ville
+    @JoinColumn(name = "ville_id")
+    public Ville ville;
+
 //    private List<Tag> tags = new ArrayList<>();
 
 

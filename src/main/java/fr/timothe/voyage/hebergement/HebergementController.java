@@ -1,5 +1,6 @@
 package fr.timothe.voyage.hebergement;
 
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +12,10 @@ public class HebergementController {
 
     private final HebergementService hebergementService;
 
+
     public HebergementController(HebergementService hebergementService){
         this.hebergementService = hebergementService;
+
     }
 
     //Create
@@ -24,7 +27,10 @@ public class HebergementController {
 
     //Read
     @GetMapping
-    public List<Hebergement> findAll(){
+    public List<Hebergement> findAll(@RequestParam(required = false) Integer id){
+        if (id != null){
+            hebergementService.findAllByVilleId(id);
+        }
         return hebergementService.findAll();
     }
 
