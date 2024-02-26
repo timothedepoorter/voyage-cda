@@ -9,7 +9,7 @@ import java.util.List;
 @RequestMapping("/hebergement")
 public class HebergementController {
 
-    private HebergementService hebergementService;
+    private final HebergementService hebergementService;
 
     public HebergementController(HebergementService hebergementService){
         this.hebergementService = hebergementService;

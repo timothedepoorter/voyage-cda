@@ -12,7 +12,6 @@ public class HebergementService {
         this.hebergementRepository = hebergementRepository;
     }
 
-
     public List<Hebergement> findAll(){
         return hebergementRepository.findAll();
     }
