@@ -1,6 +1,8 @@
 package fr.timothe.voyage.hebergement;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -15,6 +17,14 @@ public class HebergementService {
     public List<Hebergement> findAll(){
         return hebergementRepository.findAll();
     }
+    public List<Hebergement> findAllByVilleId(Integer id){
+        return hebergementRepository.findAllByVilleId(id).orElseThrow(
+                () -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "Aucun hébergement n'a été trouvé dans cette ville."));
+    }
+
+
 
     public Hebergement findById(Integer id){
         return hebergementRepository.findById(id).orElseThrow(
