@@ -1,5 +1,7 @@
 package fr.timothe.voyage.voyage;
 
+import fr.timothe.voyage.hebergement.Hebergement;
+import fr.timothe.voyage.vol.Vol;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,4 +26,12 @@ public class Voyage {
     private String nomClient;
 
     private Integer nbVoyageur;
+
+    @ManyToOne
+    @JoinColumn(name = "vol_id")
+    private Vol vol;
+
+    @ManyToOne
+    @JoinColumn(name = "hebergement_id")
+    private Hebergement hebergement;
 }
