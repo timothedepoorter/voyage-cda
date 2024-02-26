@@ -1,0 +1,17 @@
+spring:
+  data:
+    jdbc:
+      repositories:
+        enabled: true
+  datasource:
+    url: jdbc:mysql://localhost:3307/voyage-project-cda?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: admin
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+server:
+  error:
+    include-stacktrace: never
+  port: 8080
