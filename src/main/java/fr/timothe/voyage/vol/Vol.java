@@ -27,7 +27,7 @@ public class Vol {
     private LocalDate dateArrive;
     private double prix;
 
-    @ManyToOne //Many = vols toOne = ville
+    @ManyToOne //Many = vols ToOne = ville
     @JoinColumn(name = "ville_id")
     private Ville ville;
 

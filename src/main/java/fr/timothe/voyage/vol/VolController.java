@@ -31,7 +31,7 @@ public class VolController {
     }
 
     //PUT
-    @PutMapping("/{id")
+    @PutMapping("/{id}")
     public Vol update(@RequestBody Vol vol) {
         return volService.update(vol);
     }
