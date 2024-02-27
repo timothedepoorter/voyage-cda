@@ -10,7 +10,8 @@ import java.util.Optional;
 
 @Repository
 public interface VolRepository extends JpaRepository<Vol, Integer> {
-    public Optional<List<Vol>> findAllByVille(
-            Ville ville
+    public Optional<List<Vol>> findAllByVilleAndDateAllerIsGreaterThanEqual(
+            Ville ville,
+            LocalDate dateAller
     );
 }

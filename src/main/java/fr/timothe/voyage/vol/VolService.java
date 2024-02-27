@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -43,8 +44,8 @@ public class VolService {
         volRepository.delete(vol);
     }
 
-    public List<Vol> findAllByVille(Ville ville) {
-        return this.volRepository.findAllByVille(ville).orElseThrow(
+    public List<Vol> findAllByFilter(Ville ville, LocalDate dateAller) {
+        return this.volRepository.findAllByVilleAndDateAllerIsGreaterThanEqual(ville, dateAller).orElseThrow(
                 () -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
                         "Aucun résultat pour votre recherche"

@@ -4,6 +4,7 @@ import fr.timothe.voyage.ville.Ville;
 import fr.timothe.voyage.ville.VilleService;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -47,9 +48,11 @@ public class VolController {
     }
 
     @GetMapping("/filterBy")
-    public List<Vol> findAllByVille(@RequestParam(name = "ville") String nom) {
+    public List<Vol> findAllByFilter(
+            @RequestParam(name = "ville") String nom,
+            @RequestParam(name = "dateAller") LocalDate dateAller
+    ) {
         Ville ville = this.villeService.findVilleByNom(nom);
-        return this.volService.findAllByVille(ville);
+        return this.volService.findAllByFilter(ville, dateAller);
     }
-
 }
