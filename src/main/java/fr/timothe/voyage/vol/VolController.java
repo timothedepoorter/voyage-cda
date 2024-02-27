@@ -50,9 +50,10 @@ public class VolController {
     @GetMapping("/filterBy")
     public List<Vol> findAllByFilter(
             @RequestParam(name = "ville") String nom,
-            @RequestParam(name = "dateAller") LocalDate dateAller
+            @RequestParam(name = "dateAller") LocalDate dateAller,
+            @RequestParam(name = "dateRetour") LocalDate dateRetour
     ) {
         Ville ville = this.villeService.findVilleByNom(nom);
-        return this.volService.findAllByFilter(ville, dateAller);
+        return this.volService.findAllByFilter(ville, dateAller, dateRetour);
     }
 }
