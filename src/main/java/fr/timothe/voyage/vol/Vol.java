@@ -22,7 +22,6 @@ public class Vol {
     private Integer id;
     private String compagnie;
     private int placesTotales;
-    private int placesDisponibles;
     private LocalDate dateDepart;
     private LocalDate dateArrive;
     private double prix;
