@@ -20,7 +20,6 @@ public class Hebergement {
     public Integer id;
     public String nom;
     public int placesTotal;
-    public int placesDisponibles;
     public int nombreEtoiles;
     public double prix;
 
