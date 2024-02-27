@@ -27,7 +27,8 @@ public class Vol {
     private LocalDate dateArrive;
     private double prix;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne //Many = vols toOne = ville
+    @JoinColumn(name = "ville_id")
     private Ville ville;
 
 
