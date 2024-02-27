@@ -63,8 +63,8 @@ public class HebergementService {
 //        return hebergementRepository.findByPlacesDisponibles(placesDisponibles);
 //    }
 //
-//    public List<Hebergement> searchByDateVol(LocalDate dateVol) {
-//        return hebergementRepository.findByVols_DateVol(dateVol);
-//    }
+public List<Hebergement> findByDisponibilite(LocalDate dateDepart, LocalDate dateRetour) {
+    return hebergementRepository.findBetweenAllerRetour(dateRetour, dateDepart);
+}
 
 }

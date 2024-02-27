@@ -1,6 +1,7 @@
 package fr.timothe.voyage.hebergement;
 import fr.timothe.voyage.ville.Ville;
 import fr.timothe.voyage.ville.VilleService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,6 +60,15 @@ public List<Hebergement> findByVille(@RequestParam Integer villeId) {
     return hebergementService.findByVille(ville);
 }
 
+//Date
+// k
+@GetMapping("/findByDisponibiliteVol")
+public ResponseEntity<List<Hebergement>> findByDisponibiliteVol(
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateDepart,
+        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateRetour) {
+    List<Hebergement> result = hebergementService.findByDisponibilite(dateDepart, dateRetour);
+    return new ResponseEntity<>(result, HttpStatus.OK);
+}
 //    @GetMapping("/searchByTag")
 //    public ResponseEntity<List<Hebergement>> searchByTag(@RequestParam String tag) {
 //        List<Hebergement> result = hebergementService.searchByTag(tag);
@@ -71,12 +81,7 @@ public List<Hebergement> findByVille(@RequestParam Integer villeId) {
 //        return new ResponseEntity<>(result, HttpStatus.OK);
 //    }
 //
-//    @GetMapping("/searchByDateVol")
-//    public ResponseEntity<List<Hebergement>> searchByDateVol(@RequestParam String dateVol) {
-//        LocalDate parsedDate = LocalDate.parse(dateVol);
-//        List<Hebergement> result = hebergementService.searchByDateVol(parsedDate);
-//        return new ResponseEntity<>(result, HttpStatus.OK);
-//    }
+
 //
 //    @GetMapping("/searchByPlacesDisponibles")
 //    public ResponseEntity<List<Hebergement>> searchByPlacesDisponibles(@RequestParam Integer placesDisponibles) {
