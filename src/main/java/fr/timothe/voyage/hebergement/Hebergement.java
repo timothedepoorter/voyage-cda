@@ -1,5 +1,6 @@
 package fr.timothe.voyage.hebergement;
 
+import fr.timothe.voyage.tag.Tag;
 import fr.timothe.voyage.ville.Ville;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -19,7 +20,6 @@ public class Hebergement {
     public Integer id;
     public String nom;
     public int placesTotal;
-    public int placesDisponibles;
     public int nombreEtoiles;
     public double prix;
 
@@ -27,7 +27,12 @@ public class Hebergement {
     @JoinColumn(name = "ville_id")
     public Ville ville;
 
-//    private List<Tag> tags = new ArrayList<>();
-
+    @ManyToMany
+    @JoinTable(
+            name = "tag_hebergement",
+            joinColumns = @JoinColumn(name="hebergement_id"),
+            inverseJoinColumns = @JoinColumn(name="tag_id")
+    )
+    private List<Tag> tags = new ArrayList<>();
 
 }

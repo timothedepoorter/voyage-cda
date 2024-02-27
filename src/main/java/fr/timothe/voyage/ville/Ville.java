@@ -1,8 +1,7 @@
 package fr.timothe.voyage.ville;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import fr.timothe.voyage.pays.Pays;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,5 +16,7 @@ public class Ville {
     public Integer id;
     public String nom;
 
-//    public Pays pays;
+    @ManyToOne // Many villes to one pays
+    @JoinColumn(name = "pays_id")
+    public Pays pays;
 }
