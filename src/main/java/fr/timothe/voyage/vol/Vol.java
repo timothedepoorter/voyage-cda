@@ -1,13 +1,14 @@
 package fr.timothe.voyage.vol;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import fr.timothe.voyage.ville.Ville;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -26,7 +27,9 @@ public class Vol {
     private LocalDate dateArrive;
     private double prix;
 
-//    private Ville villeDepart;
-//    private Ville villeArrive;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Ville ville;
+
+
 
 }
