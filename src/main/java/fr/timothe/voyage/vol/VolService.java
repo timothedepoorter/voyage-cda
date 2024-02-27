@@ -44,7 +44,7 @@ public class VolService {
         volRepository.delete(vol);
     }
 
-    public List<Vol> findAllByFilter(Ville ville, LocalDate dateAller, LocalDate dateRetour, Float prix) {
+    public List<Vol> findAllByFilter(Ville ville, LocalDate dateAller, LocalDate dateRetour, Double prix) {
         return this.volRepository.findAllByVilleAndDateAllerIsGreaterThanEqualAndDateRetourIsLessThanEqualAndPrixIsLessThanEqual(
                 ville,
                 dateAller,

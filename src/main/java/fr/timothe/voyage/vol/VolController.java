@@ -52,7 +52,7 @@ public class VolController {
             @RequestParam(name = "ville") String nom,
             @RequestParam(name = "dateAller") LocalDate dateAller,
             @RequestParam(name = "dateRetour") LocalDate dateRetour,
-            @RequestParam(name = "prix") Float prix
+            @RequestParam(name = "prix") Double prix
     ) {
         Ville ville = this.villeService.findVilleByNom(nom);
         return this.volService.findAllByFilter(ville, dateAller, dateRetour, prix);

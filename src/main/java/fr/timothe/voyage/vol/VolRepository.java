@@ -16,6 +16,6 @@ public interface VolRepository extends JpaRepository<Vol, Integer> {
             Ville ville,
             LocalDate dateAller,
             LocalDate dateRetour,
-            Float prix
+            Double prix
     );
 }
