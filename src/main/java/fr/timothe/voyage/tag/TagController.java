@@ -32,7 +32,7 @@ public class TagController {
     }
 
     //PUT
-    @PutMapping("/{id")
+    @PutMapping("/{id}")
     public Tag update(@RequestBody Tag tag) {
         return tagService.update(tag);
     }
