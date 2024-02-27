@@ -27,6 +27,8 @@ public class Voyage {
 
     private Integer nbVoyageur;
 
+    private Integer nbJour;
+
     @ManyToOne
     @JoinColumn(name = "vol_id")
     private Vol vol;
