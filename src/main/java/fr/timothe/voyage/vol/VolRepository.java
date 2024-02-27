@@ -11,9 +11,11 @@ import java.util.Optional;
 
 @Repository
 public interface VolRepository extends JpaRepository<Vol, Integer> {
-    public Optional<List<Vol>> findAllByVilleAndDateAllerIsGreaterThanEqualAndDateRetourIsLessThanEqual(
+    public Optional<List<Vol>>
+    findAllByVilleAndDateAllerIsGreaterThanEqualAndDateRetourIsLessThanEqualAndPrixIsLessThanEqual (
             Ville ville,
             LocalDate dateAller,
-            LocalDate dateRetour
+            LocalDate dateRetour,
+            Float prix
     );
 }

@@ -44,11 +44,12 @@ public class VolService {
         volRepository.delete(vol);
     }
 
-    public List<Vol> findAllByFilter(Ville ville, LocalDate dateAller, LocalDate dateRetour) {
-        return this.volRepository.findAllByVilleAndDateAllerIsGreaterThanEqualAndDateRetourIsLessThanEqual(
+    public List<Vol> findAllByFilter(Ville ville, LocalDate dateAller, LocalDate dateRetour, Float prix) {
+        return this.volRepository.findAllByVilleAndDateAllerIsGreaterThanEqualAndDateRetourIsLessThanEqualAndPrixIsLessThanEqual(
                 ville,
                 dateAller,
-                dateRetour
+                dateRetour,
+                prix
         ).orElseThrow(
                 () -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
