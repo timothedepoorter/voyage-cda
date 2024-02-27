@@ -1,6 +1,9 @@
 package fr.timothe.voyage.vol;
 
+import fr.timothe.voyage.ville.Ville;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -38,5 +41,14 @@ public class VolService {
     public void deleteById(Integer id) {
         Vol vol = this.findById(id);
         volRepository.delete(vol);
+    }
+
+    public List<Vol> findAllByVille(Ville ville) {
+        return this.volRepository.findAllByVille(ville).orElseThrow(
+                () -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Aucun résultat pour votre recherche"
+                )
+        );
     }
 }
