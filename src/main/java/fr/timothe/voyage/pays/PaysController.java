@@ -1,5 +1,6 @@
 package fr.timothe.voyage.pays;
 
+import fr.timothe.voyage.ville.Ville;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,5 +41,11 @@ public class PaysController {
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Integer id){
         paysService.deleteById(id);
+    }
+
+    @PostMapping("/{id}/villes")
+    public Ville addVilleToPays(@PathVariable Integer id, @RequestBody Ville ville) {
+        this.paysService.addVilleToPays(ville, id);
+        return ville;
     }
 }

@@ -1,4 +1,6 @@
 package fr.timothe.voyage.pays;
+import fr.timothe.voyage.ville.Ville;
+import fr.timothe.voyage.ville.VilleService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -6,9 +8,11 @@ import java.util.List;
 @Service
 public class PaysService {
     private final PaysRepository paysRepository;
+    private final VilleService villeService;
 
-    public PaysService(PaysRepository paysRepository) {
+    public PaysService(PaysRepository paysRepository, VilleService villeService) {
         this.paysRepository = paysRepository;
+        this.villeService = villeService;
     }
 
     public List<Pays> findAll() {
@@ -22,6 +26,15 @@ public class PaysService {
     }
 
     public Pays save(Pays pays) {return paysRepository.save(pays);}
+
+
+    public Pays addVilleToPays(Ville ville, Integer id){
+        Pays pays = this.findById(id);
+        ville = villeService.findById(ville.getId());
+        pays.getVilles().add(ville);
+        return paysRepository.save(pays);
+
+    }
 
     public Pays update(Pays pays){
         return paysRepository.save(pays);
