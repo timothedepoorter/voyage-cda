@@ -1,5 +1,6 @@
 package fr.timothe.voyage.ville;
 
+import fr.timothe.voyage.hebergement.Hebergement;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,5 +45,11 @@ public class VilleController {
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Integer id){
         villeService.deleteById(id);
+    }
+
+    @PostMapping("/{id}/hebergements")
+    public Hebergement addHebergementToVille(@PathVariable Integer id, @RequestBody Hebergement hebergement) {
+        this.villeService.addHebergementToVille(hebergement, id);
+        return hebergement;
     }
 }
