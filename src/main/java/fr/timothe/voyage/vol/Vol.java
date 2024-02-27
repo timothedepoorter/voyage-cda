@@ -23,8 +23,8 @@ public class Vol {
     private String compagnie;
     private int placesTotales;
     private int placesDisponibles;
-    private LocalDate dateDepart;
-    private LocalDate dateArrive;
+    private LocalDate dateAller;
+    private LocalDate dateRetour;
     private double prix;
 
     @ManyToOne //Many = vols ToOne = ville
