@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/hebergements")
+@RequestMapping(path="/hebergements")
 public class HebergementController {
 
     private final HebergementService hebergementService;
@@ -28,6 +28,11 @@ public class HebergementController {
         return hebergementService.save(hebergement);
     }
 
+    // Liste tous les hébergements
+    @GetMapping
+    public List<Hebergement> findAll() {
+        return hebergementService.FindAll();
+    }
     //Read
     @GetMapping("/{id}")
     public Hebergement findById(@PathVariable Integer id) {
@@ -49,7 +54,7 @@ public class HebergementController {
     //Chercher un hébergement par ...
 
     //Destination
-    //http://localhost:8080/hebergement/findByVille?villeId=1
+    //http://localhost:8080/hebergements/findByVille?villeId=1
     @GetMapping("/findByVille")
     public List<Hebergement> findByVille(@RequestParam Integer villeId) {
         Ville ville = villeService.findById(villeId);
@@ -57,7 +62,7 @@ public class HebergementController {
     }
 
     //Date
-    // http://votre-domaine.com/findByDisponibilite?dateArrivee=2022-02-28&dateDepart=2022-03-05
+    // http://localhost:8080/hebergements/findByDate?dateArrivee=2024-03-01&dateDepart=2024-03-10
     @GetMapping("/findByDate")
     public ResponseEntity<List<Hebergement>> findByDate(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateArrivee,

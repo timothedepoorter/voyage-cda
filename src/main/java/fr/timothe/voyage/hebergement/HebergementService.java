@@ -34,6 +34,9 @@ public class HebergementService {
         return hebergementRepository.save(hebergement);
     }
 
+    public List<Hebergement> FindAll() {
+        return hebergementRepository.findAll();
+    }
     public void deleteById(Integer id){
         Hebergement hebergement = this.findById(id);
         hebergementRepository.delete(hebergement);
@@ -54,6 +57,8 @@ public class HebergementService {
     public List<Hebergement> findByDateArriveeAndDateDepart(LocalDate dateArrivee, LocalDate dateDepart) {
         return hebergementRepository.findByDateArriveeAndDateDepart(dateArrivee, dateDepart);
     }
+
+
 
 //    public List<Hebergement> searchByTag(String tag) {
 //        return hebergementRepository.findByTags(tag);
