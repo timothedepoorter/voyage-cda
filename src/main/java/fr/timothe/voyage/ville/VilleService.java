@@ -1,7 +1,12 @@
 package fr.timothe.voyage.ville;
+
+import org.springframework.http.HttpStatus;
+
 import fr.timothe.voyage.hebergement.Hebergement;
 import fr.timothe.voyage.hebergement.HebergementService;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -48,5 +53,14 @@ public class VilleService {
     public void deleteById(Integer id){
         Ville ville = this.findById(id);
         villeRepository.delete(ville);
+    }
+
+    public Ville findVilleByNom(String nomVille) {
+        return this.villeRepository.findVilleByNom(nomVille).orElseThrow(
+                () -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "Aucune ville trouvée avec ce nom"
+                )
+        );
     }
 }
