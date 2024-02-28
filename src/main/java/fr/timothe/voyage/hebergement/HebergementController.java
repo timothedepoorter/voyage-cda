@@ -62,7 +62,7 @@ public class HebergementController {
     }
 
     //Date
-    // http://localhost:8080/hebergements/findByDate?dateArrivee=2024-03-01&dateDepart=2024-03-10
+    //http://localhost:8080/hebergements/findByDate?dateArrivee=2024-03-01&dateDepart=2024-03-10
     @GetMapping("/findByDate")
     public ResponseEntity<List<Hebergement>> findByDate(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateArrivee,
