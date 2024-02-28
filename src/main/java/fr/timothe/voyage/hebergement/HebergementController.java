@@ -1,11 +1,14 @@
 package fr.timothe.voyage.hebergement;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.timothe.voyage.hebergement.dto.HebergementDto;
+import fr.timothe.voyage.hebergement.dto.PlaceRestanteHebergementDto;
+import fr.timothe.voyage.hebergement.dto.ReservationHebergementDto;
 import fr.timothe.voyage.ville.Ville;
 import fr.timothe.voyage.ville.VilleService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -20,10 +23,11 @@ public class HebergementController {
     private final HebergementService hebergementService;
     private final VilleService villeService;
 
-
-    public HebergementController(HebergementService hebergementService, VilleService villeService) {
+    private ObjectMapper objectMapper;
+    public HebergementController(HebergementService hebergementService, VilleService villeService,ObjectMapper objectMapper) {
         this.hebergementService = hebergementService;
         this.villeService = villeService;
+        this.objectMapper = objectMapper;
     }
 
     //Create
@@ -35,8 +39,10 @@ public class HebergementController {
 
     // Liste tous les hébergements
     @GetMapping
-    public List<Hebergement> findAll() {
-        return hebergementService.FindAll();
+    public List<HebergementDto> findAll() {
+        return hebergementService.FindAll().stream().map(
+                hebergement -> objectMapper.convertValue(hebergement, HebergementDto.class)
+        ).toList();
     }
     //Read
     @GetMapping("/{id}")
