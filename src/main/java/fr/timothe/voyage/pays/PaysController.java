@@ -1,5 +1,7 @@
 package fr.timothe.voyage.pays;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.timothe.voyage.pays.dto.PaysDto;
 import fr.timothe.voyage.ville.Ville;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -10,9 +12,11 @@ import java.util.List;
 @RequestMapping(path="/pays")
 public class PaysController {
     private final PaysService paysService;
+    private final ObjectMapper objectMapper;
 
-    public PaysController(PaysService paysService) {
+    public PaysController(PaysService paysService, ObjectMapper objectMapper) {
         this.paysService = paysService;
+        this.objectMapper = objectMapper;
     }
 
    //create
@@ -22,8 +26,10 @@ public class PaysController {
 
     //get
     @GetMapping
-    public List<Pays> findAll(){
-        return paysService.findAll();
+    public List<PaysDto> findAll(){
+        return paysService.findAll().stream().map(
+                pays -> objectMapper.convertValue(pays, PaysDto.class)
+        ).toList();
     }
 
     @GetMapping("/{id}")
