@@ -71,93 +71,163 @@ docker-compose down -v
 
 ### Diagramme de classes
 
-```puml
+![](https://www.planttext.com/api/plantuml/png/fLDDQyCm3BtxLvYSDiB2TisfPHsK7KRPIkzEegO2nmwoMrR6_ljavxCTFOm54YjFblpq92-SL-IFZPP2mzvBRoLXVV2oGeBIepL2b5ev9tVsh6gGNoB5IkOIZHTfgyukbnl-YlI4MaCkTs4HAMV5_TPwfNDPsMCHC6ERPurWV2wT9pHrX0g2LtiarwVia0sJmX9RPVpWE5bEjRDQf0VhWUrrM4H907HtBzonRGcRQ3UsmZr6KtmF_0FBZlrqqaJaWlqK5FzlHytgdyLOVH7HQbM2wxMO8IjqhJN8qembXjDMq7Bnev0HMnBX2IPrA-LXoHRbSiLc1xo3Pnq7fBHDgsg37FGni2Ny7Bj1u81EKIDkz04elFmpw3dJS2xjLEOQ2g0Q6kxdRu768_zM-rYWALwynSbxGPs7gyxbLjN_BuAJtEnks2L479laAP4F3vRNB7jBUfAXpptG-IP7l2bNlfbUDtQ4uUu6xkgyUUXSzkGno_gDqGgITCy2JCMN-WS0)
 
-    left to right direction
+[//]: # ()
+[//]: # (```puml)
 
-class Voyage {
-+id : int
-+pays: Pays
-+ville: Ville
-+tarifTotal: double
-+nomClient: string
-+nombreJours: int
-+nombreParticipants: int
-+vol: Vol
-+hotel: Hotel
-creer()
-supprimer()
-modifier()
+[//]: # ()
+[//]: # (    left to right direction)
 
-}
+[//]: # ()
+[//]: # (class Voyage {)
 
-class Pays {
-+id: int
-+nom: string
-+ville: Ville
+[//]: # (+id : int)
 
-}
+[//]: # (+pays: Pays)
 
-class Ville {
-+id: int
-+nom: string
-+pays: Pays
+[//]: # (+ville: Ville)
 
-}
+[//]: # (+tarifTotal: double)
 
-class Vol {
-+id: int
-+placesTotal: int
-+placesDisponibles: int
-+villeDepart: Ville
-+villeArrivee: Ville
-+dateAller: Date
-+dateRetour: Date
-+compagnie: String
-+prix: double
-reserver()
-rechercher()
-creer()
-modifier()
-supprimer()
+[//]: # (+nomClient: string)
 
-}
+[//]: # (+nombreJours: int)
 
-class Hebergement {
-+id: int
-+nom: String
-+placesTotal: int
-+placesDisponibles: int
-+ville: Ville
-+nbEtoiles: int
-+prix: double
-+tag Tag
-reserver()
-rechercher()
-creer()
-modifier()
-supprimer()
+[//]: # (+nombreParticipants: int)
 
-}
+[//]: # (+vol: Vol)
 
-class Tag {
-+id: int
-+nom: string
+[//]: # (+hotel: Hotel)
 
-}
+[//]: # (creer&#40;&#41;)
 
+[//]: # (supprimer&#40;&#41;)
 
+[//]: # (modifier&#40;&#41;)
 
-Pays "1" --o "1..N" Ville
-Vol "1..N" --o "1" Ville
-Voyage "1..N" --o "1" Hebergement
-Voyage "1..N" --o "1" Vol
-Ville "1" --o "1..N" Hebergement
-Hebergement "0.." --o "0.." Tag
+[//]: # ()
+[//]: # (})
 
+[//]: # ()
+[//]: # (class Pays {)
 
-  
-```
+[//]: # (+id: int)
+
+[//]: # (+nom: string)
+
+[//]: # (+ville: Ville)
+
+[//]: # ()
+[//]: # (})
+
+[//]: # ()
+[//]: # (class Ville {)
+
+[//]: # (+id: int)
+
+[//]: # (+nom: string)
+
+[//]: # (+pays: Pays)
+
+[//]: # ()
+[//]: # (})
+
+[//]: # ()
+[//]: # (class Vol {)
+
+[//]: # (+id: int)
+
+[//]: # (+placesTotal: int)
+
+[//]: # (+placesDisponibles: int)
+
+[//]: # (+villeDepart: Ville)
+
+[//]: # (+villeArrivee: Ville)
+
+[//]: # (+dateAller: Date)
+
+[//]: # (+dateRetour: Date)
+
+[//]: # (+compagnie: String)
+
+[//]: # (+prix: double)
+
+[//]: # (reserver&#40;&#41;)
+
+[//]: # (rechercher&#40;&#41;)
+
+[//]: # (creer&#40;&#41;)
+
+[//]: # (modifier&#40;&#41;)
+
+[//]: # (supprimer&#40;&#41;)
+
+[//]: # ()
+[//]: # (})
+
+[//]: # ()
+[//]: # (class Hebergement {)
+
+[//]: # (+id: int)
+
+[//]: # (+nom: String)
+
+[//]: # (+placesTotal: int)
+
+[//]: # (+placesDisponibles: int)
+
+[//]: # (+ville: Ville)
+
+[//]: # (+nbEtoiles: int)
+
+[//]: # (+prix: double)
+
+[//]: # (+tag Tag)
+
+[//]: # (reserver&#40;&#41;)
+
+[//]: # (rechercher&#40;&#41;)
+
+[//]: # (creer&#40;&#41;)
+
+[//]: # (modifier&#40;&#41;)
+
+[//]: # (supprimer&#40;&#41;)
+
+[//]: # ()
+[//]: # (})
+
+[//]: # ()
+[//]: # (class Tag {)
+
+[//]: # (+id: int)
+
+[//]: # (+nom: string)
+
+[//]: # ()
+[//]: # (})
+
+[//]: # ()
+[//]: # ()
+[//]: # ()
+[//]: # (Pays "1" --o "1..N" Ville)
+
+[//]: # (Vol "1..N" --o "1" Ville)
+
+[//]: # (Voyage "1..N" --o "1" Hebergement)
+
+[//]: # (Voyage "1..N" --o "1" Vol)
+
+[//]: # (Ville "1" --o "1..N" Hebergement)
+
+[//]: # (Hebergement "0.." --o "0.." Tag)
+
+[//]: # ()
+[//]: # ()
+[//]: # (  )
+[//]: # (```)
 <br>
 
 ## Contributeurs  :woman_technologist: :man_technologist:
