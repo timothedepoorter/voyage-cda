@@ -28,4 +28,5 @@ public class Tag {
     @ManyToMany(mappedBy="tags")
     private List<Hebergement> hebergements = new ArrayList<>();
 
+
 }
