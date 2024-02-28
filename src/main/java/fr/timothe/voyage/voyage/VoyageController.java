@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/voyage")
+@RequestMapping(path = "/voyages")
 public class VoyageController {
     private final VoyageService voyageService;
 
@@ -29,12 +29,12 @@ public class VoyageController {
     }
 
     @PostMapping()
-    public Voyage save(Voyage voyage) {
+    public Voyage save(@RequestBody Voyage voyage) {
         return this.voyageService.save(voyage);
     }
 
     @PutMapping(path ="/{id}")
-    public Voyage update(Voyage voyage) {
+    public Voyage update(@RequestBody Voyage voyage) {
         return this.voyageService.save(voyage);
     }
 }

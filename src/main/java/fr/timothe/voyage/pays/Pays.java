@@ -1,6 +1,8 @@
 package fr.timothe.voyage.pays;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import fr.timothe.voyage.ville.Ville;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,6 +20,10 @@ import java.util.List;
 @AllArgsConstructor
 @Table(
         name = "pays"
+)
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
 )
 public class Pays {
     @Id

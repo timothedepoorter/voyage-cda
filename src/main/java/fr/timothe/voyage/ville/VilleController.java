@@ -2,10 +2,14 @@ package fr.timothe.voyage.ville;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.timothe.voyage.hebergement.Hebergement;
+
 import fr.timothe.voyage.hebergement.dto.HebergementSansVilleDto;
 import fr.timothe.voyage.pays.dto.PaysCompletDto;
 import fr.timothe.voyage.ville.dto.VilleCompletDto;
 import fr.timothe.voyage.ville.dto.VilleSansPaysDto;
+
+import fr.timothe.voyage.ville.dto.VilleDto;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,8 +35,10 @@ public class VilleController {
 
     //Read
     @GetMapping
-    public List<Ville> findAll(){
-        return villeService.findAll();
+    public List<VilleDto> findAll(){
+        return villeService.findAll().stream().map(
+                ville -> objectMapper.convertValue(ville, VilleDto.class)
+        ).toList();
     }
 
     @GetMapping("/{id}")

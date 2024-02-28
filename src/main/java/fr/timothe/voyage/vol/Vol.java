@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Getter
@@ -22,7 +20,6 @@ public class Vol {
     private Integer id;
     private String compagnie;
     private int placesTotales;
-    private int placesDisponibles;
     private LocalDate dateAller;
     private LocalDate dateRetour;
     private double prix;

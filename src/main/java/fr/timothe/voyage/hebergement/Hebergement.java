@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,8 @@ public class Hebergement {
     public String nom;
     public int placesTotal;
     public int nombreEtoiles;
+    private LocalDate dateArrivee;
+    private LocalDate dateDepart;
     public double prix;
 
     @ManyToOne // Many hébergements to one ville
@@ -34,5 +37,4 @@ public class Hebergement {
             inverseJoinColumns = @JoinColumn(name="tag_id")
     )
     private List<Tag> tags = new ArrayList<>();
-
 }
