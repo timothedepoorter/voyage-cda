@@ -1,7 +1,10 @@
 package fr.timothe.voyage.pays;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import fr.timothe.voyage.pays.dto.PaysCompletDto;
+import fr.timothe.voyage.pays.dto.PaysDto;
+
 import fr.timothe.voyage.ville.Ville;
 import fr.timothe.voyage.ville.dto.VilleSansPaysDto;
 import org.springframework.http.HttpStatus;
@@ -27,8 +30,10 @@ public class PaysController {
 
     //get
     @GetMapping
-    public List<Pays> findAll(){
-        return paysService.findAll();
+    public List<PaysDto> findAll(){
+        return paysService.findAll().stream().map(
+                pays -> objectMapper.convertValue(pays, PaysDto.class)
+        ).toList();
     }
 
     @GetMapping("/{id}")
