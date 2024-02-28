@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class HebergementService {
@@ -22,9 +24,12 @@ public class HebergementService {
     }
 
     public Hebergement findById(Integer id){
-        return hebergementRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("L'hébergement n'existe pas")
-        );
+        Optional<Hebergement> optionalHebergement = hebergementRepository.findById(id);
+        if (optionalHebergement.isPresent()) {
+            return optionalHebergement.get();
+        } else {
+            throw new NoSuchElementException("Aucun hébergement trouvé avec l'ID spécifié.");
+        }
     }
 
     public Hebergement save(Hebergement hebergement){
@@ -91,4 +96,23 @@ public class HebergementService {
         return hebergementRepository.findByDateArriveeAndDateDepart(dateArrivee, dateDepart);
     }
 
+    public void effectuerReservation(Integer id, int nombrePersonnes) {
+        Optional<Hebergement> optionalHebergement = hebergementRepository.findById(id);
+
+        if (optionalHebergement.isPresent()) {
+            Hebergement hebergement = optionalHebergement.get();
+            int placesDisponibles = hebergement.getPlacesTotal() - nombrePersonnes;
+
+            if (placesDisponibles >= 0) {
+                hebergement.setPlacesTotal(placesDisponibles);
+                hebergementRepository.save(hebergement);
+            } else {
+                throw new IllegalArgumentException("Nombre de places insuffisant pour la réservation.");
+            }
+        } else {
+            throw new NoSuchElementException("Aucun hébergement trouvé avec l'ID spécifié.");
+        }
+    }
 }
+
+
