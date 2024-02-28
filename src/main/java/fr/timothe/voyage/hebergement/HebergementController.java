@@ -53,6 +53,17 @@ public class HebergementController {
 
     //Chercher un hébergement par ...
 
+    @GetMapping("/filterBy")
+    public List<Hebergement> findAllByFilter(
+            @RequestParam(name = "ville",required = false) String nom,
+            @RequestParam(name = "dateArrivee",required = false) LocalDate dateArrivee,
+            @RequestParam(name = "dateDepart",required = false) LocalDate dateDepart,
+            @RequestParam(name = "prix",required = false) Double prix
+    ) {
+        Ville ville = (nom != null) ? this.villeService.findVilleByNom(nom) : null;
+        return this.hebergementService.findAllByFilter(ville, dateArrivee, dateDepart, prix);
+    }
+
     //Destination
     //http://localhost:8080/hebergements/findByVille?villeId=1
     @GetMapping("/findByVille")
