@@ -1,9 +1,8 @@
 package fr.timothe.voyage.vol;
 
 import fr.timothe.voyage.ville.Ville;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -45,16 +44,21 @@ public class VolService {
     }
 
     public List<Vol> findAllByFilter(Ville ville, LocalDate dateAller, LocalDate dateRetour, Double prix) {
-        return this.volRepository.findAllByVilleAndDateAllerIsGreaterThanEqualAndDateRetourIsLessThanEqualAndPrixIsLessThanEqual(
-                ville,
-                dateAller,
-                dateRetour,
-                prix
-        ).orElseThrow(
-                () -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Aucun résultat pour votre recherche"
-                )
-        );
+        Specification<Vol> spec = Specification.where(null);
+
+        if (ville != null) {
+            spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("ville"), ville));
+        }
+        if (dateAller != null) {
+            spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get("dateAller"), dateAller));
+        }
+        if (dateRetour != null) {
+            spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get("dateRetour"), dateRetour));
+        }
+        if (prix != null) {
+            spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get("prix"), prix));
+        }
+
+        return volRepository.findAll(spec);
     }
 }
