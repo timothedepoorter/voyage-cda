@@ -12,7 +12,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-
 @Entity
 public class Vol {
     @Id
