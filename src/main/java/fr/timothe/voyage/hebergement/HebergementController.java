@@ -41,6 +41,7 @@ public class HebergementController {
     //Read
     @GetMapping("/{id}")
     public Hebergement findById(@PathVariable Integer id) {
+
         return hebergementService.findById(id);
     }
 
