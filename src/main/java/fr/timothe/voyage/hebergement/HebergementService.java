@@ -43,34 +43,33 @@ public class HebergementService {
         hebergementRepository.delete(hebergement);
     }
 
-//    public List<Hebergement> findAllByFilter(Ville ville, LocalDate dateArrivee, LocalDate dateDepart, Double prix) {
-//        return this.hebergementRepository.findAllByVilleAndDateArriveeIsGreaterThanEqualAndDateDepartIsLessThanEqualAndPrixIsLessThanEqual(
-//                ville,
-//                dateArrivee,
-//                dateDepart,
-//                prix
-//        ).orElseThrow(
-//                () -> new ResponseStatusException(
-//                        HttpStatus.NOT_FOUND,
-//                        "Aucun résultat pour votre recherche"
-//                )
-//        );
-//    }
 
-    public List<Hebergement> findAllByFilter(Ville ville, LocalDate dateArrivee, LocalDate dateDepart, Double prix) {
+    public List<Hebergement> findAllByFilter(
+            Ville ville,
+            LocalDate dateArrivee,
+            LocalDate dateDepart,
+            Double prix,
+            List<String> tags
+    ) {
         Specification<Hebergement> spec = Specification.where(null);
 
         if (ville != null) {
             spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("ville"), ville));
         }
         if (dateArrivee != null) {
+            //greaterThanOrEqualTo (>=)  egal ou posterieur
             spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get("dateArrivee"), dateArrivee));
         }
         if (dateDepart != null) {
+            //lessThanOrEqualTo (<=) egal ou anterieur
             spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get("dateDepart"), dateDepart));
         }
         if (prix != null) {
             spec = spec.and((root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get("prix"), prix));
+        }
+        if (tags != null && !tags.isEmpty()) {
+            //indique à JPA de faire une jointure
+            spec = spec.and((root, query, criteriaBuilder) -> root.join("tags").get("nom").in(tags));
         }
 
         return hebergementRepository.findAll(spec);
@@ -92,18 +91,4 @@ public class HebergementService {
         return hebergementRepository.findByDateArriveeAndDateDepart(dateArrivee, dateDepart);
     }
 
-
-
-//    public List<Hebergement> searchByTag(String tag) {
-//        return hebergementRepository.findByTags(tag);
-//    }
-//
-//    public List<Hebergement> searchByTarif( double prix) {
-//        return hebergementRepository.findByTarif(prix);
-//    }
-//
-//    public List<Hebergement> searchByPlacesDisponibles(Integer placesDisponibles) {
-//        return hebergementRepository.findByPlacesDisponibles(placesDisponibles);
-//    }
-//
 }

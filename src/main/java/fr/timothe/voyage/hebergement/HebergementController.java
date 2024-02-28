@@ -58,10 +58,11 @@ public class HebergementController {
             @RequestParam(name = "ville",required = false) String nom,
             @RequestParam(name = "dateArrivee",required = false) LocalDate dateArrivee,
             @RequestParam(name = "dateDepart",required = false) LocalDate dateDepart,
-            @RequestParam(name = "prix",required = false) Double prix
+            @RequestParam(name = "prix",required = false) Double prix,
+            @RequestParam(name = "tags", required = false) List<String> tags
     ) {
         Ville ville = (nom != null) ? this.villeService.findVilleByNom(nom) : null;
-        return this.hebergementService.findAllByFilter(ville, dateArrivee, dateDepart, prix);
+        return this.hebergementService.findAllByFilter(ville, dateArrivee, dateDepart, prix, tags);
     }
 
     //Destination
@@ -82,22 +83,5 @@ public class HebergementController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-//    @GetMapping("/searchByTag")
-//    public ResponseEntity<List<Hebergement>> searchByTag(@RequestParam String tag) {
-//        List<Hebergement> result = hebergementService.searchByTag(tag);
-//        return new ResponseEntity<>(result, HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/searchByTarif")
-//    public ResponseEntity<List<Hebergement>> searchByTarif(@RequestParam double prix) {
-//        List<Hebergement> result = hebergementService.searchByTarif(prix);
-//        return new ResponseEntity<>(result, HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/searchByPlacesDisponibles")
-//    public ResponseEntity<List<Hebergement>> searchByPlacesDisponibles(@RequestParam Integer placesDisponibles) {
-//        List<Hebergement> result = hebergementService.searchByPlacesDisponibles(placesDisponibles);
-//        return new ResponseEntity<>(result, HttpStatus.OK);
-//    }
 
 }

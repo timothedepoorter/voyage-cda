@@ -12,11 +12,4 @@ public interface HebergementRepository extends JpaRepository<Hebergement, Intege
    List<Hebergement> findByVille(Ville ville);
     List<Hebergement> findByDateArriveeAndDateDepart(LocalDate dateArrivee, LocalDate dateDepart);
 
-    Optional<List<Hebergement>>
-    findAllByVilleAndDateArriveeIsGreaterThanEqualAndDateDepartIsLessThanEqualAndPrixIsLessThanEqual (
-            Ville ville,
-            LocalDate dateArrivee,
-            LocalDate dateDepart,
-            Double prix
-    );
 }
