@@ -1,5 +1,7 @@
 package fr.timothe.voyage.ville;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import fr.timothe.voyage.hebergement.Hebergement;
 import fr.timothe.voyage.pays.Pays;
 import jakarta.persistence.*;
@@ -14,6 +16,10 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class Ville {
     @Id
     @GeneratedValue

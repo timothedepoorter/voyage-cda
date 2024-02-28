@@ -1,6 +1,7 @@
 package fr.timothe.voyage.ville;
 import fr.timothe.voyage.hebergement.Hebergement;
 import fr.timothe.voyage.hebergement.HebergementService;
+import fr.timothe.voyage.pays.Pays;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,13 +34,14 @@ public class VilleService {
     }
 
 
-    public Ville addHebergementToVille(Hebergement hebergement, Integer id){
+    public Ville addHebergementToVille( Integer id, Hebergement hebergement){
         Ville ville = this.findById(id);
         hebergement = hebergementService.findById(hebergement.getId());
         ville.getHebergements().add(hebergement);
-        return villeRepository.save(ville);
+        return this.save(ville);
 
     }
+
 
     public Ville update(Ville ville){
         return villeRepository.save(ville);

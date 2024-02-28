@@ -1,18 +1,25 @@
 package fr.timothe.voyage.ville;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.timothe.voyage.hebergement.Hebergement;
+import fr.timothe.voyage.hebergement.dto.HebergementSansVilleDto;
+import fr.timothe.voyage.pays.dto.PaysCompletDto;
+import fr.timothe.voyage.ville.dto.VilleCompletDto;
+import fr.timothe.voyage.ville.dto.VilleSansPaysDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/ville")
+@RequestMapping("/villes")
 public class VilleController {
     private final VilleService villeService;
+    private final ObjectMapper objectMapper;
 
-    public VilleController(VilleService villeService){
+    public VilleController(VilleService villeService, ObjectMapper objectMapper){
         this.villeService = villeService;
+        this.objectMapper = objectMapper;
     }
 
     //Create
@@ -29,8 +36,9 @@ public class VilleController {
     }
 
     @GetMapping("/{id}")
-    public Ville findById(@PathVariable Integer id){
-        return villeService.findById(id);
+    public VilleSansPaysDto findById(@PathVariable Integer id){
+
+        return objectMapper.convertValue( villeService.findById(id), VilleSansPaysDto.class);
     }
 
 
@@ -47,9 +55,23 @@ public class VilleController {
         villeService.deleteById(id);
     }
 
+
+
+
     @PostMapping("/{id}/hebergements")
-    public Hebergement addHebergementToVille(@PathVariable Integer id, @RequestBody Hebergement hebergement) {
-        this.villeService.addHebergementToVille(hebergement, id);
-        return hebergement;
+    public VilleCompletDto addHebergementToVille(@PathVariable Integer id, @RequestBody Hebergement hebergement) {
+        Ville ville = villeService.addHebergementToVille(id, hebergement);
+        VilleCompletDto villeCompletDto = new VilleCompletDto();
+        villeCompletDto.setId(ville.getId());
+        villeCompletDto.setNom(ville.getNom());
+        villeCompletDto.setHebergements(
+                ville.getHebergements().stream().map(
+                        unmappedHebergement -> objectMapper.convertValue(
+                                unmappedHebergement,
+                                HebergementSansVilleDto.class
+                        )
+                ).toList()
+        );
+        return villeCompletDto;
     }
 }

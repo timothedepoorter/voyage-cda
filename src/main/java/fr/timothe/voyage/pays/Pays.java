@@ -1,5 +1,6 @@
 package fr.timothe.voyage.pays;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import fr.timothe.voyage.ville.Ville;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
