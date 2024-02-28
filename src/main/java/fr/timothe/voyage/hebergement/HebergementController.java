@@ -5,7 +5,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,9 +16,8 @@ public class HebergementController {
     private final VilleService villeService;
 
 
-    public HebergementController(HebergementService hebergementService, VilleService villeService){
+    public HebergementController(HebergementService hebergementService, VilleService villeService) {
         this.hebergementService = hebergementService;
-
         this.villeService = villeService;
     }
 
@@ -32,43 +30,42 @@ public class HebergementController {
 
     //Read
     @GetMapping("/{id}")
-    public Hebergement findById(@PathVariable Integer id){
+    public Hebergement findById(@PathVariable Integer id) {
         return hebergementService.findById(id);
     }
 
     //Update
     @PutMapping("/{id}")
-    public Hebergement update(@RequestBody Hebergement hebergement){
+    public Hebergement update(@RequestBody Hebergement hebergement) {
         return hebergementService.update(hebergement);
     }
 
     //Delete
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Integer id){
+    public void deleteById(@PathVariable Integer id) {
         hebergementService.deleteById(id);
     }
 
+    //Chercher un hébergement par ...
 
+    //Destination
+    //http://localhost:8080/hebergement/findByVille?villeId=1
+    @GetMapping("/findByVille")
+    public List<Hebergement> findByVille(@RequestParam Integer villeId) {
+        Ville ville = villeService.findById(villeId);
+        return hebergementService.findByVille(ville);
+    }
 
-//Chercher un hébergement par ...
+    //Date
+    // http://votre-domaine.com/findByDisponibilite?dateArrivee=2022-02-28&dateDepart=2022-03-05
+    @GetMapping("/findByDate")
+    public ResponseEntity<List<Hebergement>> findByDate(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateArrivee,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateDepart) {
+        List<Hebergement> result = hebergementService.findByDateArriveeAndDateDepart(dateArrivee, dateDepart);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 
-//Destination
-//http://localhost:8080/hebergement/findByVille?villeId=1
-@GetMapping("/findByVille")
-public List<Hebergement> findByVille(@RequestParam Integer villeId) {
-    Ville ville = villeService.findById(villeId);
-    return hebergementService.findByVille(ville);
-}
-
-//Date
-// k
-@GetMapping("/findByDisponibiliteVol")
-public ResponseEntity<List<Hebergement>> findByDisponibiliteVol(
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateDepart,
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateRetour) {
-    List<Hebergement> result = hebergementService.findByDisponibilite(dateDepart, dateRetour);
-    return new ResponseEntity<>(result, HttpStatus.OK);
-}
 //    @GetMapping("/searchByTag")
 //    public ResponseEntity<List<Hebergement>> searchByTag(@RequestParam String tag) {
 //        List<Hebergement> result = hebergementService.searchByTag(tag);
@@ -80,8 +77,6 @@ public ResponseEntity<List<Hebergement>> findByDisponibiliteVol(
 //        List<Hebergement> result = hebergementService.searchByTarif(prix);
 //        return new ResponseEntity<>(result, HttpStatus.OK);
 //    }
-//
-
 //
 //    @GetMapping("/searchByPlacesDisponibles")
 //    public ResponseEntity<List<Hebergement>> searchByPlacesDisponibles(@RequestParam Integer placesDisponibles) {

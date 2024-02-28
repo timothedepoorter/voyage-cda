@@ -2,7 +2,6 @@ package fr.timothe.voyage.hebergement;
 
 import fr.timothe.voyage.tag.Tag;
 import fr.timothe.voyage.ville.Ville;
-import fr.timothe.voyage.vol.Vol;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,6 +37,4 @@ public class Hebergement {
             inverseJoinColumns = @JoinColumn(name="tag_id")
     )
     private List<Tag> tags = new ArrayList<>();
-
-
 }
