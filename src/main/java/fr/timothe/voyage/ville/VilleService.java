@@ -1,6 +1,10 @@
 package fr.timothe.voyage.ville;
 
 import org.springframework.http.HttpStatus;
+
+import fr.timothe.voyage.hebergement.Hebergement;
+import fr.timothe.voyage.hebergement.HebergementService;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -10,9 +14,11 @@ import java.util.List;
 public class VilleService {
 
     private final VilleRepository villeRepository;
+    private final HebergementService hebergementService;
 
-    public VilleService(VilleRepository villeRepository) {
+    public VilleService(VilleRepository villeRepository, HebergementService hebergementService) {
         this.villeRepository = villeRepository;
+        this.hebergementService = hebergementService;
     }
 
     public List<Ville> findAll(){
@@ -25,8 +31,19 @@ public class VilleService {
         );
     }
 
+
+
     public Ville save(Ville ville){
         return villeRepository.save(ville);
+    }
+
+
+    public Ville addHebergementToVille(Hebergement hebergement, Integer id){
+        Ville ville = this.findById(id);
+        hebergement = hebergementService.findById(hebergement.getId());
+        ville.getHebergements().add(hebergement);
+        return villeRepository.save(ville);
+
     }
 
     public Ville update(Ville ville){
