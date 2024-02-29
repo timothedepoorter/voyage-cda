@@ -1,4 +1,4 @@
-# CDA Trip Agency :airplane: :sunrise:
+# CDA Trip Agency 🛫🐙🛬
 
 ![](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHJvZXV6aGR6M25oa3BwcXlnNXJ3Y2doNjRuZnlwaDNyMXJ2dTEwayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/M8wGfV2Ohj5mE1PYiX/giphy.gif)
 
@@ -10,27 +10,29 @@
 
 ## Contexte
 <hr>
-Projet réalisé avec Spring Boot reprenant le sytème d'une agence de voyage permettant d'organiser un voyage selon l'envie du client. <br>
-
+Ce projet, développé en Java avec le framework Spring Boot,
+vise à créer un système de gestion d'agence de voyage. 
+Il permet d'organiser des voyages sur mesure selon les préférences des clients.
 
 <br>
 
-### Exemple scénarios  :
+### Exemples de Scénarios
 
-Le client  :
-- veut partir une semaine en bord de mer, hébérgé dans un hôtel 5 étoiles en Juin pour 75 000 ¥ avec Internet parce que c'est un dev
-- change d’avis et voudrais partir avec sa copine pour le même budget (future feature) parce qu'on dépense plus cher pour un pc mais pas pour sa meuf
+Client :
 
+Le client veut partir une semaine en bord de mer, hébergé dans un hôtel 5 étoiles en Juin pour 75 000 ¥ avec Internet, car c'est un développeur.
+Le client change d'avis et souhaite partir avec sa copine pour le même budget.
 
-Notre agence  :
-- peut rechercher les critères de voyage correspondant à sa demande 
-- peut ajouter, modifier, supprimer des éléments pour peaufiner notre super catalogue de voyage
-- peut associer des hébergements/tags a des villes/pays
-- peut organiser des voyages qui sont mieux que Lidl voyage et plus cher, cest beau ça.
-<br>
+Agence :
 
-⚠️⚠️⚠️⚠️⚠️⚠️ 
-Nos vols vers le Canada sont tous en retard, cause de Titouan dans l'avion !!!!!! 
+L'agence peut rechercher les critères de voyage correspondant à la demande du client.
+Elle peut ajouter, modifier, supprimer des éléments pour affiner son catalogue de voyages afin de trouver le voyage qui conviendra le mieux.
+Elle peut associer des hébergements/tags à des villes/pays.
+Elle peut organiser des voyages de qualité supérieure, surpassant les offres de Lidl voyage et offrant des expériences plus haut de gamme.
+
+Pour un voyage tentaculaire, Choisissez CDA TRIP AGENCY 🐙🐙
+
+⚠️ Note : Nos vols vers le Canada sont tous en retard, à cause de Titouan dans l'avion !!!!!! ⚠️
 
 ## Technologies et outils utilisés 
 <hr>
@@ -56,15 +58,15 @@ Nos vols vers le Canada sont tous en retard, cause de Titouan dans l'avion !!!!!
 
 <br>
 
-#### Lancer Docker:
-````
-docker-compose up -d
-````
+#### Gestion des Conteneurs Docker 🐋
 
-#### Stopper Docker:
-
+Lancer le conteneur Docker :
 ````
-docker-compose down -v
+ docker-compose up -d
+````
+Arrêter le conteneur Docker :
+````
+ docker-compose down -v
 ````
 
 <br>
@@ -233,12 +235,16 @@ docker-compose down -v
 [//]: # (```)
 <br>
 
-## Contributeurs  :woman_technologist: :man_technologist:
+## Contributeurs  👩‍✈️👨‍✈️🧑‍✈️
 
 <hr>
 
 **_[Timothé](https://github.com/timothedepoorter), [Justine](https://github.com/Arheee), [Margot](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHd5YTdvcTl0dTduaXVkZ3p0YWJxd3BkY3l3YW10YWliZXdzcTMyZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HaBTHigPfnpYvHISuX/giphy.gif), [Juliette](https://github.com/Juliette117)_**
 
 <br>
+
+## Licence
+
+CDA TripAgency 🛫
 
 
