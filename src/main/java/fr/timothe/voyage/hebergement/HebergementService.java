@@ -57,10 +57,6 @@ public class HebergementService {
             erreurs.add("Le nom de logement est obligatoire");
         }
 
-        if (hebergement.getVille() == null) {
-            erreurs.add("L'hébergement se situe forcément dans une ville");
-        }
-
         if (hebergement.getPrix() <= 0) {
             erreurs.add("C'est pas gratuit");
         }
