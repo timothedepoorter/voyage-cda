@@ -11,9 +11,11 @@ import fr.timothe.voyage.ville.dto.VilleSansPaysDto;
 import fr.timothe.voyage.ville.dto.VilleDto;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/villes")
@@ -42,9 +44,9 @@ public class VilleController {
     }
 
     @GetMapping("/{id}")
-    public VilleSansPaysDto findById(@PathVariable Integer id){
+    public VilleCompletDto findById(@PathVariable Integer id){
 
-        return objectMapper.convertValue( villeService.findById(id), VilleSansPaysDto.class);
+        return objectMapper.convertValue( villeService.findById(id), VilleCompletDto.class);
     }
 
 

@@ -5,6 +5,7 @@ import fr.timothe.voyage.hebergement.dto.PlaceRestanteHebergementDto;
 import fr.timothe.voyage.hebergement.dto.ReservationHebergementDto;
 import fr.timothe.voyage.ville.Ville;
 import fr.timothe.voyage.ville.VilleService;
+import fr.timothe.voyage.ville.dto.VilleCompletDto;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,9 +48,9 @@ public class HebergementController {
     }
     //Read
     @GetMapping("/{id}")
-    public Hebergement findById(@PathVariable Integer id) {
+    public HebergementDto findById(@PathVariable Integer id) {
 
-        return hebergementService.findById(id);
+        return objectMapper.convertValue( hebergementService.findById(id), HebergementDto.class);
     }
 
     //Update
