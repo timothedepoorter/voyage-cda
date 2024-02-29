@@ -56,10 +56,6 @@ public class VilleService {
             erreurs.add("Une ville a forcément un nom");
         }
 
-        if (ville.getPays() == null) {
-            erreurs.add("La ville se trouve forcément dans un pays");
-        }
-
         if (!erreurs.isEmpty()) {
             throw new BadRequestException(erreurs);
         }
