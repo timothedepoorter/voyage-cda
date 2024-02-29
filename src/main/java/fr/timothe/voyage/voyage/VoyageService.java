@@ -1,8 +1,7 @@
 package fr.timothe.voyage.voyage;
 
-import org.springframework.http.HttpStatus;
+import fr.timothe.voyage.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -19,8 +18,7 @@ public class VoyageService {
 
     public Voyage findById(Integer id) {
         return this.voyageRepository.findById(id).orElseThrow(
-                () -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
+                () -> new NotFoundException(
                         "Voyage " + id + " introuvable"
                 )
         );

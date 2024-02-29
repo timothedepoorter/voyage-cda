@@ -1,5 +1,6 @@
 package fr.timothe.voyage.tag;
 
+import fr.timothe.voyage.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class TagService {
 
     public Tag findById( Integer id) {
         return  tagRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Tag inexistant")
+                () -> new NotFoundException("Tag inexistant")
         );
     }
 

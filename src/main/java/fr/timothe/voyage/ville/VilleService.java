@@ -1,5 +1,6 @@
 package fr.timothe.voyage.ville;
 
+import fr.timothe.voyage.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 
 import fr.timothe.voyage.hebergement.Hebergement;
@@ -27,7 +28,7 @@ public class VilleService {
 
     public Ville findById(Integer id){
         return villeRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("La ville n'existe pas")
+                () -> new NotFoundException("La ville n'existe pas")
         );
     }
 
