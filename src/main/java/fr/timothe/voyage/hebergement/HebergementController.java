@@ -1,12 +1,21 @@
 package fr.timothe.voyage.hebergement;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.timothe.voyage.hebergement.dto.HebergementDto;
+import fr.timothe.voyage.hebergement.dto.PlaceRestanteHebergementDto;
+import fr.timothe.voyage.hebergement.dto.ReservationHebergementDto;
 import fr.timothe.voyage.ville.Ville;
 import fr.timothe.voyage.ville.VilleService;
+import fr.timothe.voyage.ville.dto.VilleCompletDto;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/hebergements")
@@ -16,10 +25,11 @@ public class HebergementController {
     private final HebergementService hebergementService;
     private final VilleService villeService;
 
-
-    public HebergementController(HebergementService hebergementService, VilleService villeService) {
+    private ObjectMapper objectMapper;
+    public HebergementController(HebergementService hebergementService, VilleService villeService,ObjectMapper objectMapper) {
         this.hebergementService = hebergementService;
         this.villeService = villeService;
+        this.objectMapper = objectMapper;
     }
 
     //Create
@@ -31,13 +41,16 @@ public class HebergementController {
 
     // Liste tous les hébergements
     @GetMapping
-    public List<Hebergement> findAll() {
-        return hebergementService.FindAll();
+    public List<HebergementDto> findAll() {
+        return hebergementService.FindAll().stream().map(
+                hebergement -> objectMapper.convertValue(hebergement, HebergementDto.class)
+        ).toList();
     }
     //Read
     @GetMapping("/{id}")
-    public Hebergement findById(@PathVariable Integer id) {
-        return hebergementService.findById(id);
+    public HebergementDto findById(@PathVariable Integer id) {
+
+        return objectMapper.convertValue( hebergementService.findById(id), HebergementDto.class);
     }
 
     //Update
@@ -59,10 +72,11 @@ public class HebergementController {
             @RequestParam(name = "ville",required = false) String nom,
             @RequestParam(name = "dateArrivee",required = false) LocalDate dateArrivee,
             @RequestParam(name = "dateDepart",required = false) LocalDate dateDepart,
-            @RequestParam(name = "prix",required = false) Double prix
+            @RequestParam(name = "prix",required = false) Double prix,
+            @RequestParam(name = "tags", required = false) List<String> tags
     ) {
         Ville ville = (nom != null) ? this.villeService.findVilleByNom(nom) : null;
-        return this.hebergementService.findAllByFilter(ville, dateArrivee, dateDepart, prix);
+        return this.hebergementService.findAllByFilter(ville, dateArrivee, dateDepart, prix, tags);
     }
 
     //Destination
@@ -83,22 +97,40 @@ public class HebergementController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-//    @GetMapping("/searchByTag")
-//    public ResponseEntity<List<Hebergement>> searchByTag(@RequestParam String tag) {
-//        List<Hebergement> result = hebergementService.searchByTag(tag);
-//        return new ResponseEntity<>(result, HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/searchByTarif")
-//    public ResponseEntity<List<Hebergement>> searchByTarif(@RequestParam double prix) {
-//        List<Hebergement> result = hebergementService.searchByTarif(prix);
-//        return new ResponseEntity<>(result, HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/searchByPlacesDisponibles")
-//    public ResponseEntity<List<Hebergement>> searchByPlacesDisponibles(@RequestParam Integer placesDisponibles) {
-//        List<Hebergement> result = hebergementService.searchByPlacesDisponibles(placesDisponibles);
-//        return new ResponseEntity<>(result, HttpStatus.OK);
-//    }
+    @PostMapping("/reservation")
+    public ResponseEntity<?> effectuerReservation(@RequestBody ReservationHebergementDto reservationDto) {
+        try {
+            hebergementService.effectuerReservation(reservationDto.getHebergementId(), reservationDto.getNombrePersonnes());
+            String successMessage = String.format("Réservation effectuée avec succès pour %d personne(s).", reservationDto.getNombrePersonnes());
+            Map<String, String> successResponse = new HashMap<>();
+            successResponse.put("message", successMessage);
+
+            return new ResponseEntity<>(successResponse, HttpStatus.OK);
+
+        } catch (IllegalArgumentException e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Nombre de places insuffisant pour la réservation.");
+            return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+        } catch (NoSuchElementException e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Aucun hébergement trouvé avec l'ID spécifié.");
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        }
+    }
+    @GetMapping("/getPlaceRestante/{hebergementId}")
+    public ResponseEntity<?> getPlaceRestante(@PathVariable Integer hebergementId) {
+        try {
+            Hebergement hebergement = hebergementService.findById(hebergementId);
+            PlaceRestanteHebergementDto responseDto = new PlaceRestanteHebergementDto();
+            responseDto.setHebergementId(hebergement.getId());
+            responseDto.setPlacesRestantes(hebergement.getPlacesTotal());
+
+            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Aucun hébergement trouvé avec l'ID spécifié.");
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        }
+    }
 
 }

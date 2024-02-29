@@ -1,5 +1,7 @@
 package fr.timothe.voyage.tag;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -19,6 +21,10 @@ import fr.timothe.voyage.hebergement.Hebergement;
 @Setter
 @NoArgsConstructor
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class Tag {
     @Id
     @GeneratedValue
@@ -27,5 +33,6 @@ public class Tag {
 
     @ManyToMany(mappedBy="tags")
     private List<Hebergement> hebergements = new ArrayList<>();
+
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+
 @Service
 public class VilleService {
 
@@ -32,18 +33,18 @@ public class VilleService {
     }
 
 
-
     public Ville save(Ville ville){
         return villeRepository.save(ville);
     }
 
 
-    public Ville addHebergementToVille( Integer id, Hebergement hebergement){
+    public Ville addHebergementToVille( Integer id, Hebergement hebergement) {
         Ville ville = this.findById(id);
         hebergement = hebergementService.findById(hebergement.getId());
         ville.getHebergements().add(hebergement);
-        return this.save(ville);
-
+        hebergement.setVille(ville);
+        this.save(ville);
+        return ville;
     }
 
 

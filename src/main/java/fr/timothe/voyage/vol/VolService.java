@@ -2,11 +2,14 @@ package fr.timothe.voyage.vol;
 
 import fr.timothe.voyage.exceptions.NotFoundException;
 import fr.timothe.voyage.ville.Ville;
+import fr.timothe.voyage.vol.dto.PlaceRestanteVolDto;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class VolService {
@@ -61,5 +64,36 @@ public class VolService {
         }
 
         return volRepository.findAll(spec);
+    }
+
+    public void effectuerReservation(Integer id, int nombrePersonnes) {
+        Optional<Vol> optionalVol = volRepository.findById(id);
+        if (optionalVol.isPresent()) {
+            Vol vol = optionalVol.get();
+            int placesDisponibles = vol.getPlacesTotales() - nombrePersonnes;
+
+            if (placesDisponibles >= 0) {
+                vol.setPlacesTotales(placesDisponibles);
+                volRepository.save(vol);
+            } else {
+                throw new IllegalArgumentException("Nombre de places insuffisant pour la réservation.");
+            }
+        } else {
+            throw new NoSuchElementException("Aucun vol trouvé avec l'ID spécifié.");
+        }
+    }
+
+    public ResponseEntity<?> getPlaceRestante(Integer volId) {
+        try {
+            Vol vol = this.findById(volId);
+            PlaceRestanteVolDto responseDto = new PlaceRestanteVolDto();
+            responseDto.setVolId(vol.getId());
+            responseDto.setPlacesRestantes(vol.getPlacesTotales());
+            return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            Map<String, String> errorResponse = new HashMap<>();
+            errorResponse.put("message", "Aucun vol trouvé avec l'ID spécifié.");
+            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+        }
     }
 }

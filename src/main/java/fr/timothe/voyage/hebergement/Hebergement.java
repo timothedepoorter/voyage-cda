@@ -1,5 +1,8 @@
 package fr.timothe.voyage.hebergement;
 
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import fr.timothe.voyage.tag.Tag;
 import fr.timothe.voyage.ville.Ville;
 import jakarta.persistence.*;
@@ -11,10 +14,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class Hebergement {
     @Id
     @GeneratedValue
@@ -36,5 +44,7 @@ public class Hebergement {
             joinColumns = @JoinColumn(name="hebergement_id"),
             inverseJoinColumns = @JoinColumn(name="tag_id")
     )
+
     private List<Tag> tags = new ArrayList<>();
+
 }

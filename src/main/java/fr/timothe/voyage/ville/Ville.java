@@ -30,6 +30,6 @@ public class Ville {
     @JoinColumn(name = "pays_id")
     public Pays pays;
 
-    @OneToMany(mappedBy = "ville")
+    @OneToMany(mappedBy = "ville", cascade = CascadeType.ALL)
     private List<Hebergement> hebergements = new ArrayList<>();
 }

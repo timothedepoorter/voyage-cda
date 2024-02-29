@@ -1,9 +1,10 @@
-package fr.timothe.voyage.pays.dto;
+package fr.timothe.voyage.tag.dto;
 
 import lombok.Data;
 
 @Data
-public class PaysDto {
+public class TagDto {
     private Integer id;
     private String nom;
+
 }
