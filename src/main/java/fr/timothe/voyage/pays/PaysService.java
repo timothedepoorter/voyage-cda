@@ -2,27 +2,18 @@ package fr.timothe.voyage.pays;
 
 import fr.timothe.voyage.exceptions.BadRequestException;
 import fr.timothe.voyage.exceptions.NotFoundException;
-import fr.timothe.voyage.pays.dto.PaysCompletDto;
 import fr.timothe.voyage.ville.Ville;
-import fr.timothe.voyage.ville.VilleRepository;
-import fr.timothe.voyage.ville.VilleService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class PaysService {
     private final PaysRepository paysRepository;
 
-    private final VilleService villeService;
-    private final VilleRepository villeRepository;
-
-    public PaysService(PaysRepository paysRepository, VilleService villeService, VilleRepository villeRepository) {
+    public PaysService(PaysRepository paysRepository) {
         this.paysRepository = paysRepository;
-        this.villeService = villeService;
-        this.villeRepository = villeRepository;
     }
 
     public List<Pays> findAll() {

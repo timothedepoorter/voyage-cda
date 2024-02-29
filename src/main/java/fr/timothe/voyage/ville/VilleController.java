@@ -4,18 +4,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.timothe.voyage.hebergement.Hebergement;
 
 import fr.timothe.voyage.hebergement.dto.HebergementSansVilleDto;
-import fr.timothe.voyage.pays.dto.PaysCompletDto;
+import fr.timothe.voyage.pays.Pays;
 import fr.timothe.voyage.ville.dto.VilleCompletDto;
-import fr.timothe.voyage.ville.dto.VilleSansPaysDto;
 
 import fr.timothe.voyage.ville.dto.VilleDto;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/villes")
@@ -81,5 +78,10 @@ public class VilleController {
                 ).toList()
         );
         return villeCompletDto;
+    }
+
+    @PostMapping("/{id}/pays")
+    public Ville addPaysToVille(@PathVariable Integer id, @RequestBody Pays pays) {
+        return villeService.addPaysToVille(id, pays);
     }
 }
