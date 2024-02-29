@@ -24,7 +24,9 @@ Ce projet, développé en Java avec le framework Spring Boot, vise à créer un 
 
 <br>
 
-### Exemple scénarios  : <br>
+### Exemple scénarios  : 
+
+<br>
 
 Client :
 
