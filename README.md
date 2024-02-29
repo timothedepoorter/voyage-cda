@@ -246,7 +246,10 @@ docker-compose down -v
 
 
 
-**_[Timothé](https://github.com/timothedepoorter), [Justine](https://github.com/Arheee), [Margot](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHd5YTdvcTl0dTduaXVkZ3p0YWJxd3BkY3l3YW10YWliZXdzcTMyZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HaBTHigPfnpYvHISuX/giphy.gif), [Juliette](https://github.com/Juliette117)_**
+**_[Timothé](https://github.com/timothedepoorter),
+[Justine](https://github.com/Arheee),
+[Margot](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHd5YTdvcTl0dTduaXVkZ3p0YWJxd3BkY3l3YW10YWliZXdzcTMyZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HaBTHigPfnpYvHISuX/giphy.gif),
+[Juliette](https://github.com/Juliette117)_**
 
 <br>
 
