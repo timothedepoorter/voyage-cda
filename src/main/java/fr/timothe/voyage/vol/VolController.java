@@ -28,7 +28,10 @@ public class VolController {
         this.objectMapper = objectMapper;
     }
 
-    //GET
+    /**
+     * GET
+     * @return une liste de vols.
+     */
     @GetMapping
     public List<VolDto> findAll() {
         return volService.findAll().stream().map(
@@ -41,24 +44,32 @@ public class VolController {
         return volService.findById(id);
     }
 
-    //POST
+
     @PostMapping
     public Vol save(@RequestBody Vol vol) {
         return volService.save(vol);
     }
 
-    //PUT
+
     @PutMapping("/{id}")
     public Vol update(@RequestBody Vol vol) {
         return volService.update(vol);
     }
 
-    //DELETE
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Integer id) {
         volService.deleteById(id);
     }
 
+    /**
+     * Recherche les vols en fonction de plusieurs critères de filtre,
+     * ou les paramètres sont facultatif.
+     * @param nom Nom de la ville.
+     * @param dateAller la date aller du vol.
+     * @param dateRetour la date retour du vol.
+     * @param prix le prix maximum souhaité.
+     * @return Une liste de vol répondant aux critères du filtre.
+     */
     @GetMapping("/filterBy")
     public List<Vol> findAllByFilter(
             @RequestParam(name = "ville", required = false) String nom,
@@ -70,11 +81,24 @@ public class VolController {
         return this.volService.findAllByFilter(ville, dateAller, dateRetour, prix);
     }
 
+    /**
+     * Nombre de place restante dans un vol.
+     * @param volId l'id du vol.
+     * @return Le nombre de places restante.
+     */
     @GetMapping("/getPlaceRestante/{volId}")
     public ResponseEntity<?> getPlaceRestante(@PathVariable Integer volId) {
         return this.volService.getPlaceRestante(volId);
     }
 
+
+    /**
+     * Effectue une reservation pour un vol.
+     * @param reservationDto Un DTO contenant les informations nécessaires pour la réservation.
+     *                       Contient l'id et le nombre de personnes pour la réservation.
+     * @return Une ResponseEntity contenant un message de succès si la réservation est effectuée avec succès.
+     * En cas d'échec, renvoie 400 pour Bad Request, 404 pour Not Found + un message.
+     */
     @PostMapping("/reservation")
     public ResponseEntity<?> effectuerReservation(@RequestBody ReservationVolDto reservationDto) {
         try {

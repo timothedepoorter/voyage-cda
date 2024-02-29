@@ -171,7 +171,7 @@ public class HebergementService {
     /**
      * Effectue une réservation pour un hébergement spécifié.
      *
-     * @param id L'identifiant unique de l'hébergement.
+     * @param id L'id de l'hébergement.
      * @param nombrePersonnes Le nombre de personnes pour lesquelles la réservation est effectuée.
      * @throws IllegalArgumentException Si le nombre de places disponibles pour la réservation est insuffisant, une exception est levée.
      * @throws NoSuchElementException Si aucun hébergement n'est trouvé avec l'ID spécifié, une exception est levée.

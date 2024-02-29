@@ -47,6 +47,14 @@ public class VolService {
         volRepository.delete(vol);
     }
 
+    /**
+     * Recherche des vols en fonction de plusieurs critères de filtre.
+     * @param ville la ville.
+     * @param dateAller la date de départ du vol souhaité.
+     * @param dateRetour la date retour souhaité.
+     * @param prix le prix maximum souhaité.
+     * @return Une liste d'objets Vols répondant aux critères de filtre.
+     */
     public List<Vol> findAllByFilter(Ville ville, LocalDate dateAller, LocalDate dateRetour, Double prix) {
         Specification<Vol> spec = Specification.where(null);
 
@@ -66,6 +74,12 @@ public class VolService {
         return volRepository.findAll(spec);
     }
 
+    /**
+     * Effectue une réservation pour un vol.
+     *
+     * @param id l'id du vol.
+     * @param nombrePersonnes le nombre de personne pour lesquelles la réservation est effectuée.
+     */
     public void effectuerReservation(Integer id, int nombrePersonnes) {
         Optional<Vol> optionalVol = volRepository.findById(id);
         if (optionalVol.isPresent()) {
@@ -83,6 +97,14 @@ public class VolService {
         }
     }
 
+
+    /**
+     * Récupère le nombre de places restantes pour un vol spécifié.
+     *
+     * @param volId L'id du vol pour lequel on récupère les places restantes.
+     * @return Une ResponseEntity contenant un DTO  indiquant l'id du vol et le nombre de places restantes.
+     *         En cas d'échec, renvoie un message d'erreur avec le code HTTP approprié (404 pour Not Found).
+     */
     public ResponseEntity<?> getPlaceRestante(Integer volId) {
         try {
             Vol vol = this.findById(volId);
