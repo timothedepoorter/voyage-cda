@@ -30,7 +30,7 @@ Notre agence  :
 <br>
 
 ⚠️⚠️⚠️⚠️⚠️⚠️ 
-Nos vols vers le Canada sont tous en retard , cause de Titouan dans l'avion !!!!!! 
+Nos vols vers le Canada sont tous en retard, cause de Titouan dans l'avion !!!!!! 
 
 ## Technologies et outils utilisés 
 <hr>
