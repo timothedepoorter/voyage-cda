@@ -18,16 +18,19 @@ Projet réalisé avec Spring Boot reprenant le sytème d'une agence de voyage pe
 ### Exemple scénarios  :
 
 Le client  :
-- veut partir une semaine en bord de mer, hébérgé dans un hôtel 5 étoiles en Juin pour 75 000 ¥ 
-- change d’avis et voudrais partir avec sa copine pour le même budget (future feature)
+- veut partir une semaine en bord de mer, hébérgé dans un hôtel 5 étoiles en Juin pour 75 000 ¥ avec Internet parce que c'est un dev
+- change d’avis et voudrais partir avec sa copine pour le même budget (future feature) parce qu'on dépense plus cher pour un pc mais pas pour sa meuf
 
 
 Notre agence  :
 - peut rechercher les critères de voyage correspondant à sa demande 
 - peut ajouter, modifier, supprimer des éléments pour peaufiner notre super catalogue de voyage
 - peut associer des hébergements/tags a des villes/pays
-
+- peut organiser des voyages qui sont mieux que Lidl voyage et plus cher, cest beau ça.
 <br>
+
+⚠️⚠️⚠️⚠️⚠️⚠️ 
+Nos vols vers le Canada sont tous en retard , cause de Titouan dans l'avion !!!!!! 
 
 ## Technologies et outils utilisés 
 <hr>
