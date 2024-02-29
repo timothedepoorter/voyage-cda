@@ -1,5 +1,7 @@
 # CDA Trip Agency :airplane: :sunrise:
 
+<hr>
+
 ![](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHJvZXV6aGR6M25oa3BwcXlnNXJ3Y2doNjRuZnlwaDNyMXJ2dTEwayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/M8wGfV2Ohj5mE1PYiX/giphy.gif)
 
 
