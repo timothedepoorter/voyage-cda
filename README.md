@@ -24,7 +24,7 @@ Ce projet, développé en Java avec le framework Spring Boot, vise à créer un 
 
 <br>
 
-### Exemple scénarios  :
+### Exemple scénarios  : <br>
 
 Client :
 
@@ -54,7 +54,7 @@ Elle peut organiser des voyages de qualité supérieure, surpassant les offres d
 
 | TOOLS                       |                                                                                                                            |
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| Language/ Framework         | ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)              |
+| Langages/ Frameworks         | ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white) ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)              |
 | BDD                         | ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)                     |   |   |   |
 | Gestionnaire de dépendances | ![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white) |
 | Conteneurisation            | ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)               |
