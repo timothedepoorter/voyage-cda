@@ -1,6 +1,14 @@
 # CDA Trip Agency :airplane: :sunrise:
 
-![](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHJvZXV6aGR6M25oa3BwcXlnNXJ3Y2doNjRuZnlwaDNyMXJ2dTEwayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/M8wGfV2Ohj5mE1PYiX/giphy.gif)
+<hr>
+
+<div align="center">
+  
+  ![](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaHJvZXV6aGR6M25oa3BwcXlnNXJ3Y2doNjRuZnlwaDNyMXJ2dTEwayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/M8wGfV2Ohj5mE1PYiX/giphy.gif)
+  
+</div>
+
+
 
 
 
@@ -9,31 +17,35 @@
 <br>
 
 ## Contexte
-<hr>
-Projet réalisé avec Spring Boot reprenant le sytème d'une agence de voyage permettant d'organiser un voyage selon l'envie du client. <br>
+
+Ce projet, développé en Java avec le framework Spring Boot, vise à créer un système de gestion d'agence de voyage.  Il permet d'organiser des voyages sur mesure selon les préférences des clients.
+. <br>
 
 
 <br>
 
 ### Exemple scénarios  :
 
-Le client  :
-- veut partir une semaine en bord de mer, hébérgé dans un hôtel 5 étoiles en Juin pour 75 000 ¥ avec Internet parce que c'est un dev
-- change d’avis et voudrais partir avec sa copine pour le même budget (future feature) parce qu'on dépense plus cher pour un pc mais pas pour sa meuf
+Client :
 
+Le client veut partir une semaine en bord de mer, hébergé dans un hôtel 5 étoiles en Juin pour 75 000 ¥ avec Internet, car c'est un développeur.
+Le client change d'avis et souhaite partir avec sa copine pour le même budget.
+Agence :
 
-Notre agence  :
-- peut rechercher les critères de voyage correspondant à sa demande 
-- peut ajouter, modifier, supprimer des éléments pour peaufiner notre super catalogue de voyage
-- peut associer des hébergements/tags a des villes/pays
-- peut organiser des voyages qui sont mieux que Lidl voyage et plus cher, cest beau ça.
+L'agence peut rechercher les critères de voyage correspondant à la demande du client.
+Elle peut ajouter, modifier, supprimer des éléments pour affiner son catalogue de voyages.
+Elle peut associer des hébergements/tags à des villes/pays.
+Elle peut organiser des voyages de qualité supérieure, surpassant les offres de Lidl voyage et offrant des expériences plus haut de gamme.
 <br>
 
-⚠️⚠️⚠️⚠️⚠️⚠️ 
-Nos vols vers le Canada sont tous en retard, cause de Titouan dans l'avion !!!!!! 
+🐙Pour un voyage tentaculaire, choisissez CDA Trip Agency 🐙
+
+⚠️ Nos vols vers le Canada sont tous en retard, cause de Titouan dans l'avion !!!!!! ⚠️
+
+<br>
 
 ## Technologies et outils utilisés 
-<hr>
+
 
 
 
@@ -43,11 +55,11 @@ Nos vols vers le Canada sont tous en retard, cause de Titouan dans l'avion !!!!!
 | BDD                         | ![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)                     |   |   |   |
 | Gestionnaire de dépendances | ![Apache Maven](https://img.shields.io/badge/Apache%20Maven-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white) |
 | Conteneurisation            | ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)               |
-| Test de l' API              | ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white) ![Insomnia](https://img.shields.io/badge/Insomnia-black?style=for-the-badge&logo=insomnia&logoColor=5849BE)                  |
+| API              | ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white) ![Insomnia](https://img.shields.io/badge/Insomnia-black?style=for-the-badge&logo=insomnia&logoColor=5849BE)    ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)              |
 <br>
 
 ## Initialisation
-<hr>
+
 
 1. Cloner le dépôt ou téléchargez le fichier zip
 2. Accéder au répertoire du projet
@@ -56,12 +68,14 @@ Nos vols vers le Canada sont tous en retard, cause de Titouan dans l'avion !!!!!
 
 <br>
 
-#### Lancer Docker:
+### Gestion des Conteneurs Docker 🐋
+
+##### Lancer conteneur Docker:
 ````
 docker-compose up -d
 ````
 
-#### Stopper Docker:
+##### Stopper conteneur Docker:
 
 ````
 docker-compose down -v
@@ -70,7 +84,7 @@ docker-compose down -v
 <br>
 
 ## Conception
-<hr>
+
 
 ### Diagramme de classes
 
@@ -233,11 +247,14 @@ docker-compose down -v
 [//]: # (```)
 <br>
 
-## Contributeurs  :woman_technologist: :man_technologist:
+## Contributeurs 🧑‍✈️👨‍✈️👩‍✈️
 
-<hr>
 
-**_[Timothé](https://github.com/timothedepoorter), [Justine](https://github.com/Arheee), [Margot](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHd5YTdvcTl0dTduaXVkZ3p0YWJxd3BkY3l3YW10YWliZXdzcTMyZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HaBTHigPfnpYvHISuX/giphy.gif), [Juliette](https://github.com/Juliette117)_**
+
+**_[Timothé](https://github.com/timothedepoorter),
+[Justine](https://github.com/Arheee),
+[Margot](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHd5YTdvcTl0dTduaXVkZ3p0YWJxd3BkY3l3YW10YWliZXdzcTMyZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HaBTHigPfnpYvHISuX/giphy.gif),
+[Juliette](https://github.com/Juliette117)_**
 
 <br>
 
