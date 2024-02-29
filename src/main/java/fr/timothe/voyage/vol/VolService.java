@@ -1,14 +1,11 @@
 package fr.timothe.voyage.vol;
 
-import fr.timothe.voyage.hebergement.Hebergement;
-import fr.timothe.voyage.hebergement.PlaceRestanteHebergementDto;
 import fr.timothe.voyage.ville.Ville;
 import fr.timothe.voyage.vol.dto.PlaceRestanteVolDto;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
 import java.util.*;

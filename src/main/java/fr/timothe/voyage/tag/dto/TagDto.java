@@ -1,4 +1,4 @@
-package fr.timothe.voyage.tag;
+package fr.timothe.voyage.tag.dto;
 
 import lombok.Data;
 

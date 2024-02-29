@@ -1,4 +1,4 @@
-package fr.timothe.voyage.hebergement;
+package fr.timothe.voyage.hebergement.dto;
 
 import lombok.Getter;
 import lombok.Setter;

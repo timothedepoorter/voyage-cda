@@ -1,9 +1,6 @@
 package fr.timothe.voyage.vol;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fr.timothe.voyage.hebergement.Hebergement;
-import fr.timothe.voyage.hebergement.PlaceRestanteHebergementDto;
-import fr.timothe.voyage.hebergement.ReservationHebergementDto;
 import fr.timothe.voyage.ville.Ville;
 import fr.timothe.voyage.ville.VilleService;
 import fr.timothe.voyage.vol.dto.ReservationVolDto;
