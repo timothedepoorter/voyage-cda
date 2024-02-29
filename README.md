@@ -30,7 +30,10 @@ Client :
 
 Le client veut partir une semaine en bord de mer, hébergé dans un hôtel 5 étoiles en Juin pour 75 000 ¥ avec Internet, car c'est un développeur.
 Le client change d'avis et souhaite partir avec sa copine pour le même budget.
-Agence :
+
+<br>
+
+Agence : <br>
 
 L'agence peut rechercher les critères de voyage correspondant à la demande du client.
 Elle peut ajouter, modifier, supprimer des éléments pour affiner son catalogue de voyages.
