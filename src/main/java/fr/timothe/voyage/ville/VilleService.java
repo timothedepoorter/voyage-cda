@@ -39,6 +39,8 @@ public class VilleService {
     }
 
 
+
+
     public Ville save(Ville ville) throws BadRequestException {
 
         verifyValuesVille(ville);
@@ -66,6 +68,7 @@ public class VilleService {
     }
 
 
+
     public Ville addHebergementToVille( Integer id, Hebergement hebergement) {
         Ville ville = this.findById(id);
         hebergement = hebergementService.findById(hebergement.getId());
@@ -74,7 +77,6 @@ public class VilleService {
         this.save(ville);
         return ville;
     }
-
 
     public Ville update(Ville ville){
         return villeRepository.save(ville);

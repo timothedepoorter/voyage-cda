@@ -23,14 +23,21 @@ public class VilleController {
         this.objectMapper = objectMapper;
     }
 
-    //Create
+    /**
+     * CREATE une ville
+     * @param ville
+     * @return une nouvelle ville
+     */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Ville save(@RequestBody Ville ville) {
         return villeService.save(ville);
     }
 
-    //Read
+    /**
+     * GET
+     * @return une liste de ville
+     */
     @GetMapping
     public List<VilleDto> findAll(){
         return villeService.findAll().stream().map(
@@ -44,23 +51,23 @@ public class VilleController {
         return objectMapper.convertValue( villeService.findById(id), VilleCompletDto.class);
     }
 
-
-    //Update
     @PutMapping("/{id}")
     public Ville update(@RequestBody Ville ville){
         return villeService.update(ville);
     }
 
-
-    //Delete
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Integer id){
         villeService.deleteById(id);
     }
 
-
-
-
+    /**
+     * Ajoute un hébergement à une ville.
+     *
+     * @param id L'id de la ville à laquelle ajouter l'hébergement.
+     * @param hebergement à ajouter à la ville.
+     * @return VilleCompletDto contenant les informations complètes de la ville après l'ajout de l'hébergement.
+     */
     @PostMapping("/{id}/hebergements")
     public VilleCompletDto addHebergementToVille(@PathVariable Integer id, @RequestBody Hebergement hebergement) {
         Ville ville = villeService.addHebergementToVille(id, hebergement);
@@ -78,6 +85,13 @@ public class VilleController {
         return villeCompletDto;
     }
 
+    /**
+     * Ajoute un pays à une ville.
+     *
+     * @param id L'id de la ville à laquelle ajouter le pays.
+     * @param pays à ajouter à la ville.
+     * @return La ville mise à jour après l'ajout du pays.
+     */
     @PostMapping("/{id}/pays")
     public Ville addPaysToVille(@PathVariable Integer id, @RequestBody Pays pays) {
         return villeService.addPaysToVille(id, pays);

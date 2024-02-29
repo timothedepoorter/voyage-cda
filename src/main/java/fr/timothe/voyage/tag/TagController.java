@@ -14,7 +14,7 @@ public class TagController {
         this.tagService = tagService;
     }
 
-    //GET
+
     @GetMapping
     public List<Tag> findAll() {
         return tagService.findAll();
@@ -25,19 +25,19 @@ public class TagController {
         return tagService.findById(id);
     }
 
-    //POST
+
     @PostMapping
     public Tag save(@RequestBody Tag tag) {
         return tagService.save(tag);
     }
 
-    //PUT
+
     @PutMapping("/{id}")
     public Tag update(@RequestBody Tag tag) {
         return tagService.update(tag);
     }
 
-    //DELETE
+
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Integer id) {
         tagService.deleteById(id);

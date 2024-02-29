@@ -15,3 +15,9 @@ server:
   error:
     include-stacktrace: never
   port: 8080
+
+springdoc:
+  swagger-ui:
+    path: /api/voyage/docs
+  api-docs:
+    path: /api/voyage/docs
