@@ -43,7 +43,7 @@ public class HebergementController {
 
     /**
      * GET
-     * @return une liste de tout les hebergements.
+     * @return une liste d'hebergements.
      */
     @GetMapping
     public List<HebergementDto> findAll() {

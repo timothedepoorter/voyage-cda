@@ -18,21 +18,26 @@ import java.util.NoSuchElementException;
 @RequestMapping(path="/pays")
 public class PaysController {
     private final PaysService paysService;
-    private final VilleService villeService;
     private final ObjectMapper objectMapper;
 
-    public PaysController(PaysService paysService, VilleService villeService, ObjectMapper objectMapper) {
+    public PaysController(PaysService paysService, ObjectMapper objectMapper) {
         this.paysService = paysService;
-        this.villeService = villeService;
         this.objectMapper = objectMapper;
     }
 
-   //create
+    /**
+     * CREATE Pays
+     * @param pays
+     * @return un nouveau pays
+     */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Pays save(@RequestBody Pays pays){return  paysService.save(pays);}
 
-    //get
+    /**
+     * GET
+     * @return une liste de pays
+     */
     @GetMapping
     public List<PaysDto> findAll(){
         return paysService.findAll().stream().map(
@@ -57,32 +62,29 @@ public class PaysController {
 
     }
 
-    //Update
+
     @PutMapping("/{id}")
     public Pays update(@RequestBody Pays pays){
         return  paysService.update(pays);
     }
 
-    //Delete
+    /**
+     * DELETE un pays
+     * @param id -utilise l'id pour supprimer le pays associé.
+     */
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Integer id){
         paysService.deleteById(id);
     }
 
+    /**
+     * Ajoute une ville à un pays.
+     *
+     * @param id L'id du pays auquel ajouter la ville.
+     * @param ville Ville à ajouter au pays.
+     * @return Un objet PaysCompletDto contenant les informations du pays après l'ajout de la ville.
+     */
     @PostMapping("/{id}/villes")
-//    public ResponseEntity<?> addVilleToPays(
-//            @PathVariable Integer id) {
-//        try {
-//            Pays pays = paysService.findById(id);
-//
-//            PaysSansVilleDto reponseDto = new PaysSansVilleDto();
-//            reponseDto.setId(pays.getId());
-//            reponseDto.setNom(pays.getNom());
-//            return new ResponseEntity<>(reponseDto, HttpStatus.CREATED);
-//        } catch (NoSuchElementException e) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
     public PaysCompletDto addVilleToPays(@PathVariable Integer id, @RequestBody Ville ville) {
         Pays pays = paysService.addVilleToPays(id, ville);
         PaysCompletDto paysCompletDto = new PaysCompletDto();
@@ -92,9 +94,7 @@ public class PaysController {
                 pays.getVilles().stream().map(
                         unmappedVille -> objectMapper.convertValue(unmappedVille, VilleSansPaysDto.class)
                 ).toList()
-
         );
-
         return paysCompletDto;
    }
 
