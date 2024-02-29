@@ -17,7 +17,8 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping(path="/hebergements")
+@RequestMapping("/hebergements")
+
 public class HebergementController {
 
     private final HebergementService hebergementService;

@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 
 import fr.timothe.voyage.hebergement.Hebergement;
 import fr.timothe.voyage.hebergement.HebergementService;
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -38,13 +37,14 @@ public class VilleService {
     }
 
 
-    public Ville addHebergementToVille(Hebergement hebergement, Integer id){
+    public Ville addHebergementToVille( Integer id, Hebergement hebergement){
         Ville ville = this.findById(id);
         hebergement = hebergementService.findById(hebergement.getId());
         ville.getHebergements().add(hebergement);
-        return villeRepository.save(ville);
+        return this.save(ville);
 
     }
+
 
     public Ville update(Ville ville){
         return villeRepository.save(ville);

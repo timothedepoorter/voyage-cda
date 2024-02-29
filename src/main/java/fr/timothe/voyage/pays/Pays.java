@@ -1,5 +1,6 @@
 package fr.timothe.voyage.pays;
 
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import fr.timothe.voyage.ville.Ville;
