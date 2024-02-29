@@ -35,7 +35,7 @@ Nos vols vers le Canada sont tous en retard, cause de Titouan dans l'avion !!!!!
 <br>
 
 ## Technologies et outils utilisés 
-<hr>
+
 
 
 
@@ -49,7 +49,7 @@ Nos vols vers le Canada sont tous en retard, cause de Titouan dans l'avion !!!!!
 <br>
 
 ## Initialisation
-<hr>
+
 
 1. Cloner le dépôt ou téléchargez le fichier zip
 2. Accéder au répertoire du projet
@@ -72,7 +72,7 @@ docker-compose down -v
 <br>
 
 ## Conception
-<hr>
+
 
 ### Diagramme de classes
 
@@ -237,7 +237,7 @@ docker-compose down -v
 
 ## Contributeurs  :woman_technologist: :man_technologist:
 
-<hr>
+
 
 **_[Timothé](https://github.com/timothedepoorter), [Justine](https://github.com/Arheee), [Margot](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbHd5YTdvcTl0dTduaXVkZ3p0YWJxd3BkY3l3YW10YWliZXdzcTMyZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/HaBTHigPfnpYvHISuX/giphy.gif), [Juliette](https://github.com/Juliette117)_**
 
