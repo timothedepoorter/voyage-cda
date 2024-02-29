@@ -1,11 +1,6 @@
 package fr.timothe.voyage.pays;
-import com.sun.net.httpserver.SimpleFileServer;
+
 import fr.timothe.voyage.exceptions.BadRequestException;
-import fr.timothe.voyage.exceptions.NotFoundException;
-import fr.timothe.voyage.pays.dto.PaysCompletDto;
-import fr.timothe.voyage.ville.Ville;
-import fr.timothe.voyage.ville.VilleRepository;
-import fr.timothe.voyage.ville.VilleService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,13 +10,8 @@ import java.util.List;
 public class PaysService {
     private final PaysRepository paysRepository;
 
-    private final VilleService villeService;
-    private final VilleRepository villeRepository;
-
-    public PaysService(PaysRepository paysRepository, VilleService villeService, VilleRepository villeRepository) {
+    public PaysService(PaysRepository paysRepository) {
         this.paysRepository = paysRepository;
-        this.villeService = villeService;
-        this.villeRepository = villeRepository;
     }
 
     public List<Pays> findAll() {
@@ -59,31 +49,6 @@ public class PaysService {
         }
 
     }
-
-
-    /**
-     * Ajoute une ville à un pays.
-     *
-     * @param paysId L'id du pays auquel ajouter la ville.
-     * @param ville La Ville à ajouter au pays.
-     * @return Le pays mis à jour après l'ajout de la ville.
-     * @throws NotFoundException Si aucun pays n'est trouvé avec l'ID spécifié, une exception est levée.
-     */
-    public Pays addVilleToPays(Integer paysId, Ville ville){
-        Pays pays = paysRepository.findById(paysId)
-                .orElseThrow(() -> new NotFoundException("Aucun pays trouvé avec l'ID spécifié."));
-
-        ville.setPays(pays);
-        return this.save(pays);
-
-//        Pays pays = this.findById(id);
-//        ville = villeService.findById(ville.getId());
-//
-//        pays.getVilles().add(ville);
-//        return this.save(pays);
-    }
-
-
 
     public Pays update(Pays pays){
         return paysRepository.save(pays);
