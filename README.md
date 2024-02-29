@@ -18,7 +18,8 @@
 
 ## Contexte
 
-Projet réalisé avec Spring Boot reprenant le sytème d'une agence de voyage permettant d'organiser un voyage selon l'envie du client. <br>
+Ce projet, développé en Java avec le framework Spring Boot, vise à créer un système de gestion d'agence de voyage.  Il permet d'organiser des voyages sur mesure selon les préférences des clients.
+. <br>
 
 
 <br>
