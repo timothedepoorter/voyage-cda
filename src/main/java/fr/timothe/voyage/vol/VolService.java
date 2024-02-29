@@ -1,5 +1,6 @@
 package fr.timothe.voyage.vol;
 
+import fr.timothe.voyage.exceptions.NotFoundException;
 import fr.timothe.voyage.ville.Ville;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class VolService {
 
     public Vol findById( Integer id) {
         return  volRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Aucun vol ne correspond")
+                () -> new NotFoundException("Aucun vol ne correspond")
         );
     }
 

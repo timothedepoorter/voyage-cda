@@ -1,11 +1,15 @@
 package fr.timothe.voyage.hebergement;
 
+import fr.timothe.voyage.exceptions.BadRequestException;
+import fr.timothe.voyage.exceptions.NotFoundException;
 import fr.timothe.voyage.ville.Ville;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,13 +27,50 @@ public class HebergementService {
 
     public Hebergement findById(Integer id){
         return hebergementRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("L'hébergement n'existe pas")
+                () -> new NotFoundException("L'hébergement n'existe pas")
         );
     }
 
-    public Hebergement save(Hebergement hebergement){
+    public Hebergement save(Hebergement hebergement) throws BadRequestException {
+
+        verifyDataHebergement(hebergement);
+
         return hebergementRepository.save(hebergement);
     }
+
+    private static void verifyDataHebergement(Hebergement hebergement) {
+        List<String> erreurs = new ArrayList<>();
+
+        if (hebergement.getNom() == null) {
+            erreurs.add("Le nom de logement est obligatoire");
+        }
+
+        if (hebergement.getVille() == null) {
+            erreurs.add("L'hébergement se situe forcément dans une ville");
+        }
+
+        if (hebergement.getPrix() <= 0) {
+            erreurs.add("C'est pas gratuit");
+        }
+
+        if (hebergement.getNombreEtoiles() < 0) {
+            erreurs.add("L'hébergement ne peut pas avoir moins de 0 étoiles");
+        }
+
+        if (hebergement.getDateDepart().isBefore(LocalDate.now())) {
+            erreurs.add("On ne peut pas retourner dans le passé");
+        }
+
+        if ((hebergement.getDateArrivee().isAfter(hebergement.getDateDepart()))) {
+            erreurs.add("On ne peut pas arriver avant d'être parti");
+        }
+
+        if (!erreurs.isEmpty()) {
+            throw new BadRequestException(erreurs);
+        }
+    }
+
+
 
     public Hebergement update(Hebergement hebergement){
         return hebergementRepository.save(hebergement);

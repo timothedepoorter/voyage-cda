@@ -1,5 +1,6 @@
 package fr.timothe.voyage.voyage;
 
+import fr.timothe.voyage.exceptions.NotFoundException;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -21,8 +22,7 @@ public class VoyageService {
 
     public Voyage findById(Integer id) {
         return this.voyageRepository.findById(id).orElseThrow(
-                () -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
+                () -> new NotFoundException(
                         "Voyage " + id + " introuvable"
                 )
         );

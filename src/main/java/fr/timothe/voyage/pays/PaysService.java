@@ -1,10 +1,14 @@
 package fr.timothe.voyage.pays;
+import com.sun.net.httpserver.SimpleFileServer;
+import fr.timothe.voyage.exceptions.BadRequestException;
+import fr.timothe.voyage.exceptions.NotFoundException;
 import fr.timothe.voyage.pays.dto.PaysCompletDto;
 import fr.timothe.voyage.ville.Ville;
 import fr.timothe.voyage.ville.VilleRepository;
 import fr.timothe.voyage.ville.VilleService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -32,14 +36,29 @@ public class PaysService {
         );
     }
 
-    public Pays save(Pays pays) {
+    public Pays save(Pays pays) throws BadRequestException {
+        verifyDataPays(pays);
+
         return paysRepository.save(pays);
+    }
+
+    private static void verifyDataPays(Pays pays) {
+        List<String> erreurs = new ArrayList<>();
+
+        if (pays.getNom() == null) {
+            erreurs.add("Le nom du pays est obligatoire");
+        }
+
+        if (!erreurs.isEmpty()) {
+            throw new BadRequestException(erreurs);
+        }
+
     }
 
 
     public Pays addVilleToPays(Integer paysId, Ville ville){
         Pays pays = paysRepository.findById(paysId)
-                .orElseThrow(() -> new NoSuchElementException("Aucun pays trouvé avec l'ID spécifié."));
+                .orElseThrow(() -> new NotFoundException("Aucun pays trouvé avec l'ID spécifié."));
 
         ville.setPays(pays);
         return this.save(pays);
