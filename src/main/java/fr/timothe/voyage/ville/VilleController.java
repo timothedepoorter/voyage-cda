@@ -2,20 +2,13 @@ package fr.timothe.voyage.ville;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.timothe.voyage.hebergement.Hebergement;
-
 import fr.timothe.voyage.hebergement.dto.HebergementSansVilleDto;
-import fr.timothe.voyage.pays.dto.PaysCompletDto;
 import fr.timothe.voyage.ville.dto.VilleCompletDto;
-import fr.timothe.voyage.ville.dto.VilleSansPaysDto;
-
 import fr.timothe.voyage.ville.dto.VilleDto;
-
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/villes")

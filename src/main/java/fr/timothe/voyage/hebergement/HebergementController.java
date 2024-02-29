@@ -5,7 +5,6 @@ import fr.timothe.voyage.hebergement.dto.PlaceRestanteHebergementDto;
 import fr.timothe.voyage.hebergement.dto.ReservationHebergementDto;
 import fr.timothe.voyage.ville.Ville;
 import fr.timothe.voyage.ville.VilleService;
-import fr.timothe.voyage.ville.dto.VilleCompletDto;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

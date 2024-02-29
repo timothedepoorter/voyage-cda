@@ -8,12 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 @Service
 public class HebergementService {
@@ -33,18 +32,18 @@ public class HebergementService {
         if (optionalHebergement.isPresent()) {
             return optionalHebergement.get();
         } else {
-            throw new NoSuchElementException("Aucun hébergement trouvé avec l'ID spécifié.");
+            throw new NotFoundException("Aucun hébergement trouvé avec l'ID spécifié.");
         }
     }
 
     public Hebergement save(Hebergement hebergement) throws BadRequestException {
 
-        verifyDataHebergement(hebergement);
+        verifyValuesHebergement(hebergement);
 
         return hebergementRepository.save(hebergement);
     }
 
-    private static void verifyDataHebergement(Hebergement hebergement) {
+    private static void verifyValuesHebergement(Hebergement hebergement) {
         List<String> erreurs = new ArrayList<>();
 
         if (hebergement.getNom() == null) {

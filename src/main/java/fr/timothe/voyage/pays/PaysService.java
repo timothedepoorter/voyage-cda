@@ -1,8 +1,7 @@
 package fr.timothe.voyage.pays;
-import com.sun.net.httpserver.SimpleFileServer;
+
 import fr.timothe.voyage.exceptions.BadRequestException;
 import fr.timothe.voyage.exceptions.NotFoundException;
-import fr.timothe.voyage.pays.dto.PaysCompletDto;
 import fr.timothe.voyage.ville.Ville;
 import fr.timothe.voyage.ville.VilleRepository;
 import fr.timothe.voyage.ville.VilleService;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
+
 
 @Service
 public class PaysService {
@@ -32,17 +31,17 @@ public class PaysService {
     public Pays findById(Integer id) {
 
         return paysRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("Le pays n'existe pas")
+                () -> new NotFoundException("Le pays n'existe pas")
         );
     }
 
     public Pays save(Pays pays) throws BadRequestException {
-        verifyDataPays(pays);
+        verifyValuesPays(pays);
 
         return paysRepository.save(pays);
     }
 
-    private static void verifyDataPays(Pays pays) {
+    private static void verifyValuesPays(Pays pays) {
         List<String> erreurs = new ArrayList<>();
 
         if (pays.getNom() == null) {
