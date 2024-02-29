@@ -1,5 +1,6 @@
 package fr.timothe.voyage.ville;
 
+import fr.timothe.voyage.exceptions.BadRequestException;
 import fr.timothe.voyage.exceptions.NotFoundException;
 import fr.timothe.voyage.pays.Pays;
 import fr.timothe.voyage.pays.PaysService;
@@ -10,6 +11,7 @@ import fr.timothe.voyage.hebergement.HebergementService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,9 +38,36 @@ public class VilleService {
         );
     }
 
-    public Ville save(Ville ville){
+
+
+
+    public Ville save(Ville ville) throws BadRequestException {
+
+        verifyValuesVille(ville);
+
+
         return villeRepository.save(ville);
     }
+
+    private static void verifyValuesVille(Ville ville) {
+        List<String> erreurs = new ArrayList<>();
+
+        if (ville.getNom() == null) {
+            erreurs.add("Une ville a forcément un nom");
+        }
+
+        if (ville.getPays() == null) {
+            erreurs.add("La ville se trouve forcément dans un pays");
+        }
+
+        if (!erreurs.isEmpty()) {
+            throw new BadRequestException(erreurs);
+        }
+
+
+    }
+
+
 
     public Ville addHebergementToVille( Integer id, Hebergement hebergement) {
         Ville ville = this.findById(id);
@@ -60,10 +89,7 @@ public class VilleService {
 
     public Ville findVilleByNom(String nomVille) {
         return this.villeRepository.findVilleByNom(nomVille).orElseThrow(
-                () -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Aucune ville trouvée avec ce nom"
-                )
+                () -> new NotFoundException("Aucune ville trouvée avec ce nom")
         );
     }
 

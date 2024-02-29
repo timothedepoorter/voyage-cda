@@ -1,5 +1,6 @@
 package fr.timothe.voyage.vol;
 
+import fr.timothe.voyage.exceptions.BadRequestException;
 import fr.timothe.voyage.exceptions.NotFoundException;
 import fr.timothe.voyage.ville.Ville;
 import fr.timothe.voyage.vol.dto.PlaceRestanteVolDto;
@@ -32,8 +33,47 @@ public class VolService {
     }
 
 
-    public Vol save(Vol vol) {
+    public Vol save(Vol vol) throws BadRequestException {
+
+        verifyValuesVol(vol);
+
         return volRepository.save(vol);
+    }
+
+    private static void verifyValuesVol(Vol vol) {
+        List<String> erreurs = new ArrayList<>();
+
+        if (vol.getVille() == null) {
+            erreurs.add("La ville de destination est obligatoire");
+        }
+        if (vol.getPrix() <= 0) {
+            erreurs.add("C'est pas gratuit");
+        }
+
+        if (vol.getPrix() <= 50) {
+            erreurs.add("A ce prix, le crash de l'avion est garanti");
+        }
+
+        if (vol.getPlacesTotales() == 0 ) {
+            erreurs.add("Pas de vol si aucune places");
+        }
+
+        if (vol.getCompagnie() == null) {
+            erreurs.add("Le vol doit appartenir à une compagnie");
+        }
+        if (vol.getDateAller().isBefore(LocalDate.now())) {
+            erreurs.add("On ne peut pas retourner dans le passé");
+        }
+
+        if ((vol.getDateRetour().isBefore(vol.getDateAller()))) {
+            erreurs.add("On ne peut pas arriver avant d'être parti");
+        }
+
+        if (!erreurs.isEmpty()) {
+            throw new BadRequestException(erreurs);
+        }
+
+
     }
 
 
