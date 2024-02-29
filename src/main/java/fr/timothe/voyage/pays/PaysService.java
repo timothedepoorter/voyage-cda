@@ -1,5 +1,4 @@
 package fr.timothe.voyage.pays;
-import com.sun.net.httpserver.SimpleFileServer;
 import fr.timothe.voyage.exceptions.BadRequestException;
 import fr.timothe.voyage.exceptions.NotFoundException;
 import fr.timothe.voyage.pays.dto.PaysCompletDto;
@@ -15,13 +14,10 @@ import java.util.List;
 public class PaysService {
     private final PaysRepository paysRepository;
 
-    private final VilleService villeService;
-    private final VilleRepository villeRepository;
 
-    public PaysService(PaysRepository paysRepository, VilleService villeService, VilleRepository villeRepository) {
+
+    public PaysService(PaysRepository paysRepository) {
         this.paysRepository = paysRepository;
-        this.villeService = villeService;
-        this.villeRepository = villeRepository;
     }
 
     public List<Pays> findAll() {
