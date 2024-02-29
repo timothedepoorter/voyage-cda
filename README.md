@@ -26,19 +26,21 @@ Ce projet, développé en Java avec le framework Spring Boot, vise à créer un 
 
 ### Exemple scénarios  :
 
-Le client  :
-- veut partir une semaine en bord de mer, hébérgé dans un hôtel 5 étoiles en Juin pour 75 000 ¥ avec Internet parce que c'est un dev
-- change d’avis et voudrais partir avec sa copine pour le même budget (future feature) parce qu'on dépense plus cher pour un pc mais pas pour sa meuf
+Client :
 
+Le client veut partir une semaine en bord de mer, hébergé dans un hôtel 5 étoiles en Juin pour 75 000 ¥ avec Internet, car c'est un développeur.
+Le client change d'avis et souhaite partir avec sa copine pour le même budget.
+Agence :
 
-Notre agence  :
-- peut rechercher les critères de voyage correspondant à sa demande 
-- peut ajouter, modifier, supprimer des éléments pour peaufiner notre super catalogue de voyage
-- peut associer des hébergements/tags a des villes/pays
-- peut organiser des voyages qui sont mieux que Lidl voyage et plus cher, cest beau ça.
+L'agence peut rechercher les critères de voyage correspondant à la demande du client.
+Elle peut ajouter, modifier, supprimer des éléments pour affiner son catalogue de voyages.
+Elle peut associer des hébergements/tags à des villes/pays.
+Elle peut organiser des voyages de qualité supérieure, surpassant les offres de Lidl voyage et offrant des expériences plus haut de gamme.
 <br>
 
-⚠️⚠️⚠️⚠️⚠️⚠️ Nos vols vers le Canada sont tous en retard, cause de Titouan dans l'avion !!!!!!
+🐙Pour un voyage tentaculaire, choisissez CDA Trip Agency 🐙
+
+⚠️ Nos vols vers le Canada sont tous en retard, cause de Titouan dans l'avion !!!!!! ⚠️
 
 <br>
 
@@ -66,12 +68,14 @@ Notre agence  :
 
 <br>
 
-#### Lancer conteneur Docker:
+### Gestion des Conteneurs Docker 🐋
+
+##### Lancer conteneur Docker:
 ````
 docker-compose up -d
 ````
 
-#### Stopper conteneur Docker:
+##### Stopper conteneur Docker:
 
 ````
 docker-compose down -v
@@ -243,7 +247,7 @@ docker-compose down -v
 [//]: # (```)
 <br>
 
-## Contributeurs  :woman_technologist: :man_technologist:
+## Contributeurs 🧑‍✈️👨‍✈️👩‍✈️
 
 
 
