@@ -56,12 +56,12 @@ Nos vols vers le Canada sont tous en retard, cause de Titouan dans l'avion !!!!!
 
 <br>
 
-#### Lancer Docker:
+#### Lancer conteneur Docker:
 ````
 docker-compose up -d
 ````
 
-#### Stopper Docker:
+#### Stopper conteneur Docker:
 
 ````
 docker-compose down -v
