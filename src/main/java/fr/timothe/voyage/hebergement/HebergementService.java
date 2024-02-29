@@ -27,6 +27,13 @@ public class HebergementService {
         return hebergementRepository.findAll();
     }
 
+    /**
+     * Récupère Hebergement en fonction de l'ID fourni.
+     *
+     * @param id Le numéro d'identification unique de l'hébergement.
+     * @return L'objet Hebergement associé à l'ID spécifié.
+     * @throws NoSuchElementException Si aucun hébergement n'est trouvé avec l'ID spécifié.
+     */
     public Hebergement findById(Integer id){
         Optional<Hebergement> optionalHebergement = hebergementRepository.findById(id);
         if (optionalHebergement.isPresent()) {
@@ -89,7 +96,16 @@ public class HebergementService {
         hebergementRepository.delete(hebergement);
     }
 
-
+    /**
+     * Recherche des hébergements en fonction de plusieurs critères de filtre.
+     *
+     * @param ville La ville.
+     * @param dateArrivee La date d'arrivée minimale souhaitée.
+     * @param dateDepart La date de départ maximale souhaitée.
+     * @param prix Le prix maximum souhaité.
+     * @param tags La liste des tags à inclure dans la recherche.
+     * @return Une liste d'objets Hebergement répondant aux critères de filtre.
+     */
     public List<Hebergement> findAllByFilter(
             Ville ville,
             LocalDate dateArrivee,
@@ -121,6 +137,13 @@ public class HebergementService {
         return hebergementRepository.findAll(spec);
     }
 
+    /**
+     * Recherche des hébergements dans une ville spécifique.
+     *
+     * @param ville La ville.
+     * @return Une liste d'objets Hebergement correspondant à la ville.
+     * @throws ResponseStatusException Si aucun hébergement n'est trouvé dans la ville spécifiée, une exception avec le statut NOT_FOUND est levée.
+     */
     public List<Hebergement> findByVille(Ville ville ) {
         List<Hebergement> result = hebergementRepository.findByVille(ville);
 
@@ -133,10 +156,25 @@ public class HebergementService {
         return result;
     }
 
+    /**
+     * Recherche des hébergements disponibles pour une période spécifiée.
+     *
+     * @param dateArrivee La date d'arrivée.
+     * @param dateDepart La date de départ.
+     * @return Une liste d'objets Hebergement disponibles pour la période spécifiée.
+     */
     public List<Hebergement> findByDateArriveeAndDateDepart(LocalDate dateArrivee, LocalDate dateDepart) {
         return hebergementRepository.findByDateArriveeAndDateDepart(dateArrivee, dateDepart);
     }
 
+    /**
+     * Effectue une réservation pour un hébergement spécifié.
+     *
+     * @param id L'identifiant unique de l'hébergement.
+     * @param nombrePersonnes Le nombre de personnes pour lesquelles la réservation est effectuée.
+     * @throws IllegalArgumentException Si le nombre de places disponibles pour la réservation est insuffisant, une exception est levée.
+     * @throws NoSuchElementException Si aucun hébergement n'est trouvé avec l'ID spécifié, une exception est levée.
+     */
     public void effectuerReservation(Integer id, int nombrePersonnes) {
         Optional<Hebergement> optionalHebergement = hebergementRepository.findById(id);
 

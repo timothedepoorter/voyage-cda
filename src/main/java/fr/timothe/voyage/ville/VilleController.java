@@ -3,7 +3,9 @@ package fr.timothe.voyage.ville;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.timothe.voyage.hebergement.Hebergement;
 import fr.timothe.voyage.hebergement.dto.HebergementSansVilleDto;
+import fr.timothe.voyage.pays.Pays;
 import fr.timothe.voyage.ville.dto.VilleCompletDto;
+
 import fr.timothe.voyage.ville.dto.VilleDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -74,5 +76,10 @@ public class VilleController {
                 ).toList()
         );
         return villeCompletDto;
+    }
+
+    @PostMapping("/{id}/pays")
+    public Ville addPaysToVille(@PathVariable Integer id, @RequestBody Pays pays) {
+        return villeService.addPaysToVille(id, pays);
     }
 }

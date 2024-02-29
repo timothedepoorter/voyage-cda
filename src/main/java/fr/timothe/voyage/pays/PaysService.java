@@ -1,7 +1,8 @@
 package fr.timothe.voyage.pays;
-
+import com.sun.net.httpserver.SimpleFileServer;
 import fr.timothe.voyage.exceptions.BadRequestException;
 import fr.timothe.voyage.exceptions.NotFoundException;
+import fr.timothe.voyage.pays.dto.PaysCompletDto;
 import fr.timothe.voyage.ville.Ville;
 import fr.timothe.voyage.ville.VilleRepository;
 import fr.timothe.voyage.ville.VilleService;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Service
 public class PaysService {
@@ -31,17 +31,23 @@ public class PaysService {
     public Pays findById(Integer id) {
 
         return paysRepository.findById(id).orElseThrow(
-                () -> new NotFoundException("Le pays n'existe pas")
+                () -> new IllegalArgumentException("Le pays n'existe pas")
         );
     }
 
     public Pays save(Pays pays) throws BadRequestException {
-        verifyValuesPays(pays);
+        verifyDataPays(pays);
 
         return paysRepository.save(pays);
     }
 
-    private static void verifyValuesPays(Pays pays) {
+    /**
+     * Vérifie les données d'un Pays pour s'assurer de la présence du nom du pays.
+     *
+     * @param pays Le pays dont les données doivent etre vérifié.
+     * @throws BadRequestException Si des erreurs sont détectées dans les données du pays, une exception BadRequestException est levée.
+     */
+    private static void verifyDataPays(Pays pays) {
         List<String> erreurs = new ArrayList<>();
 
         if (pays.getNom() == null) {
@@ -55,6 +61,14 @@ public class PaysService {
     }
 
 
+    /**
+     * Ajoute une ville à un pays.
+     *
+     * @param paysId L'id du pays auquel ajouter la ville.
+     * @param ville La Ville à ajouter au pays.
+     * @return Le pays mis à jour après l'ajout de la ville.
+     * @throws NotFoundException Si aucun pays n'est trouvé avec l'ID spécifié, une exception est levée.
+     */
     public Pays addVilleToPays(Integer paysId, Ville ville){
         Pays pays = paysRepository.findById(paysId)
                 .orElseThrow(() -> new NotFoundException("Aucun pays trouvé avec l'ID spécifié."));

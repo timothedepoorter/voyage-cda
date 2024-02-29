@@ -2,6 +2,8 @@ package fr.timothe.voyage.voyage;
 
 import fr.timothe.voyage.exceptions.BadRequestException;
 import fr.timothe.voyage.exceptions.NotFoundException;
+import fr.timothe.voyage.hebergement.HebergementService;
+import fr.timothe.voyage.vol.VolService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,8 +12,12 @@ import java.util.List;
 @Service
 public class VoyageService {
     private final VoyageRepository voyageRepository;
-    public VoyageService(VoyageRepository voyageRepository) {
+    private final VolService volService;
+    private final HebergementService hebergementService;
+    public VoyageService(VoyageRepository voyageRepository, VolService volService, HebergementService hebergementService) {
         this.voyageRepository = voyageRepository;
+        this.volService = volService;
+        this.hebergementService = hebergementService;
     }
 
     public List<Voyage> findAll() {
@@ -32,6 +38,9 @@ public class VoyageService {
     }
 
     public Voyage save(Voyage voyage) throws BadRequestException {
+
+        this.volService.effectuerReservation(voyage.getVol().getId(), voyage.getNbVoyageur());
+        this.hebergementService.effectuerReservation(voyage.getHebergement().getId(), voyage.getNbVoyageur());
 
         verifyValuesVoyage(voyage);
 

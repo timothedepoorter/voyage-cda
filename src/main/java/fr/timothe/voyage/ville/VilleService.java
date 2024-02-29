@@ -2,6 +2,8 @@ package fr.timothe.voyage.ville;
 
 import fr.timothe.voyage.exceptions.BadRequestException;
 import fr.timothe.voyage.exceptions.NotFoundException;
+import fr.timothe.voyage.pays.Pays;
+import fr.timothe.voyage.pays.PaysService;
 import org.springframework.http.HttpStatus;
 
 import fr.timothe.voyage.hebergement.Hebergement;
@@ -18,10 +20,12 @@ public class VilleService {
 
     private final VilleRepository villeRepository;
     private final HebergementService hebergementService;
+    private final PaysService paysService;
 
-    public VilleService(VilleRepository villeRepository, HebergementService hebergementService) {
+    public VilleService(VilleRepository villeRepository, HebergementService hebergementService, PaysService paysService) {
         this.villeRepository = villeRepository;
         this.hebergementService = hebergementService;
+        this.paysService = paysService;
     }
 
     public List<Ville> findAll(){
@@ -85,5 +89,13 @@ public class VilleService {
         return this.villeRepository.findVilleByNom(nomVille).orElseThrow(
                 () -> new NotFoundException("Aucune ville trouvée avec ce nom")
         );
+    }
+
+    public Ville addPaysToVille(Integer id, Pays pays) {
+        Ville ville = this.findById(id);
+        pays = paysService.findById(pays.getId());
+        ville.setPays(pays);
+        this.save(ville);
+        return ville;
     }
 }
