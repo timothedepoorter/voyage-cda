@@ -19,12 +19,10 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/hebergements")
-
 public class HebergementController {
 
     private final HebergementService hebergementService;
     private final VilleService villeService;
-
     private ObjectMapper objectMapper;
     public HebergementController(HebergementService hebergementService, VilleService villeService,ObjectMapper objectMapper) {
         this.hebergementService = hebergementService;
@@ -32,41 +30,64 @@ public class HebergementController {
         this.objectMapper = objectMapper;
     }
 
-    //Create
+    /**
+     * CREATE
+     * @param hebergement
+     * @return un nouvel hebergement
+     */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Hebergement save(@RequestBody Hebergement hebergement) {
         return hebergementService.save(hebergement);
     }
 
-    // Liste tous les hébergements
+    /**
+     * GET
+     * @return une liste de tout les hebergements.
+     */
     @GetMapping
     public List<HebergementDto> findAll() {
         return hebergementService.FindAll().stream().map(
                 hebergement -> objectMapper.convertValue(hebergement, HebergementDto.class)
         ).toList();
     }
-    //Read
+
+    /**
+     * GET
+     * @param id identifiant unique d'un hebergement
+     * @return l'hebergement qui possède l'id spécifié.
+     */
     @GetMapping("/{id}")
     public HebergementDto findById(@PathVariable Integer id) {
 
         return objectMapper.convertValue( hebergementService.findById(id), HebergementDto.class);
     }
 
-    //Update
+
     @PutMapping("/{id}")
     public Hebergement update(@RequestBody Hebergement hebergement) {
         return hebergementService.update(hebergement);
     }
 
-    //Delete
+    /**
+     * DELETE un hebergement
+     * @param id identifiant unique de l'hebergement pour supprimé l'hebergement associé.
+     */
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Integer id) {
         hebergementService.deleteById(id);
     }
 
-    //Chercher un hébergement par ...
-
+    /**
+     * Recherche des hébergements en fonction de plusieurs critères de filtre,
+     * ou les paramètres sont facultatif.
+     * @param nom Nom de la ville.
+     * @param dateArrivee La date d'arrivée.
+     * @param dateDepart La date de départ.
+     * @param prix Le prix maximum souhaité.
+     * @param tags La liste des tags à inclure dans la recherche.
+     * @return Une liste d'Hebergement répondant aux critères du filtre.
+     */
     @GetMapping("/filterBy")
     public List<Hebergement> findAllByFilter(
             @RequestParam(name = "ville",required = false) String nom,
@@ -79,16 +100,31 @@ public class HebergementController {
         return this.hebergementService.findAllByFilter(ville, dateArrivee, dateDepart, prix, tags);
     }
 
-    //Destination
+
+
     //http://localhost:8080/hebergements/findByVille?villeId=1
+    /**
+     * Recherche des hébergements dans une ville spécifiée.
+     *
+     * @param villeId L'identifiant de la ville pour laquelle on veut un hebergement.
+     * @return Une liste d' Hebergement correspondant à la ville.
+     */
     @GetMapping("/findByVille")
     public List<Hebergement> findByVille(@RequestParam Integer villeId) {
         Ville ville = villeService.findById(villeId);
         return hebergementService.findByVille(ville);
     }
 
-    //Date
+
     //http://localhost:8080/hebergements/findByDate?dateArrivee=2024-03-01&dateDepart=2024-03-10
+    /**
+     * Recherche des hébergements disponibles pour une période spécifiée.
+     *
+     * @param dateArrivee La date d'arrivée souhaitée au format ISO (yyyy-MM-dd).
+     * @param dateDepart La date de départ.
+     * @return Une ResponseEntity contenant une liste d'Hebergement pour la période spécifiée.
+     *         La réponse est OK (200) si des hébergements sont trouvés.
+     */
     @GetMapping("/findByDate")
     public ResponseEntity<List<Hebergement>> findByDate(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateArrivee,
@@ -97,6 +133,15 @@ public class HebergementController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+
+    /**
+     * Effectue une réservation pour un hébergement.
+     *
+     * @param reservationDto Un DTO contenant les informations nécessaires pour la réservation.
+     *                       Contient l'id et le nombre de personnes pour la réservation.
+     * @return Une ResponseEntity contenant un message de succès si la réservation est effectuée avec succès.
+     *         En cas d'échec, renvoie 400 pour Bad Request, 404 pour Not Found + un message.
+     */
     @PostMapping("/reservation")
     public ResponseEntity<?> effectuerReservation(@RequestBody ReservationHebergementDto reservationDto) {
         try {
@@ -117,6 +162,14 @@ public class HebergementController {
             return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
         }
     }
+
+    /**
+     * Nombre de places restantes pour un hébergement.
+     *
+     * @param hebergementId L'id de l'hébergement pour lequel on récupère les places restantes.
+     * @return Une ResponseEntity contenant un DTO avec le nombre de place restante.
+     *         En cas d'échec, renvoie 404 pour Not Found.
+     */
     @GetMapping("/getPlaceRestante/{hebergementId}")
     public ResponseEntity<?> getPlaceRestante(@PathVariable Integer hebergementId) {
         try {
