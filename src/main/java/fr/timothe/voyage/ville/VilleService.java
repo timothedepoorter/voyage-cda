@@ -36,11 +36,9 @@ public class VilleService {
         );
     }
 
-
     public Ville save(Ville ville){
         return villeRepository.save(ville);
     }
-
 
     public Ville addHebergementToVille( Integer id, Hebergement hebergement) {
         Ville ville = this.findById(id);
@@ -50,7 +48,6 @@ public class VilleService {
         this.save(ville);
         return ville;
     }
-
 
     public Ville update(Ville ville){
         return villeRepository.save(ville);
