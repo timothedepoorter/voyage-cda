@@ -252,6 +252,15 @@ docker-compose down -v
 [//]: # (```)
 <br>
 
+
+## Possibles fonctionnalités à venir
+
+- Filtrage des dates pour obtenir un itinéraire complet de voyage
+- Intégration d'un service Duty-Free durant les voyages.
+- Expansion du système de voyage pour inclure des options telles que les trajets en bus et à vélo.
+- Offres promotionnelles sur les voyages et les circuits.
+- Approfondir la fonctionnalité des Tags. 
+
 ## Contributeurs 🧑‍✈️👨‍✈️👩‍✈️
 
 
